@@ -14,7 +14,7 @@ async function changeHash() {
   const html = await getPage(str)
   root.innerHTML = html
   const form: Nullable<HTMLFormElement> = document.getElementById('form1') as HTMLFormElement
-  if (form !== undefined) {
+  if (form !== null) {
     form.addEventListener("submit", onSubmit, true);
   }
 }
