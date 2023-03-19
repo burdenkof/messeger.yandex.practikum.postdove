@@ -1,94 +1,93 @@
-import Handlebars from "handlebars";
-import { signupTemplate } from "./template.js";
-import { buttonTemplate } from "../../components/button/template.js";
-import { getinput } from "../../components/input/input.js";
+import { signupTemplate } from "./template";
+import { buttonTemplate } from "../../components/button/template";
+import { getinput, inputState,StatusFormControl,   TypeFormControl} from "../../components/input/input";
 
 export function getSignup() {
 
-
+    const Handlebars = require("handlebars")
     const template = Handlebars.compile(signupTemplate)
 
-    const inputs = [];
-    const itemFirstName = {
+    const inputs: inputState[] = [];
+    const itemFirstName: inputState = {
         name: 'first_name',
         placeholder: 'Jonh',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'First name',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemFirstName.html = getinput(itemFirstName)
 
 
-    const itemSecondName = {
+    const itemSecondName: inputState = {
         name: 'second_name',
         placeholder: 'Smith',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'Second name',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemSecondName.html = getinput(itemSecondName)
 
 
-    const itemDisplayName = {
+    const itemDisplayName: inputState = {
         name: 'display_name',
         placeholder: 'Jo',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'Nick',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemDisplayName.html = getinput(itemDisplayName)
 
-    const itemLogin = {
+    const itemLogin: inputState = {
         name: 'login',
         placeholder: 'Joker',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'Login',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemLogin.html = getinput(itemLogin)
 
-    const itemEmail = {
+    const itemEmail: inputState = {
         name: 'email',
         placeholder: 'box@domain.com',
-        status: 'error',
+        status: StatusFormControl.error,
         label: 'Email',
         error: 'Wrong email',
-        type: 'email'
+        type: TypeFormControl.email
     }
     itemEmail.html = getinput(itemEmail)
 
 
-    const itemPhone = {
+    const itemPhone: inputState = {
         name: 'phone',
         placeholder: '+7 (927) 999-99-99',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'Phone',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemPhone.html = getinput(itemPhone)
 
-    const itemPassword = {
+    const itemPassword: inputState = {
         name: 'password',
         placeholder: '',
-        status: 'success',
+        status: StatusFormControl.success,
         label: 'Password',
         error: '',
-        type: 'password'
+        type: TypeFormControl.password
     }
     itemPassword.html = getinput(itemPassword)
 
-    const itemPassword2 = {
+    const itemPassword2: inputState = {
         name: 'password2',
         placeholder: '',
-        status: 'error',
+        status: StatusFormControl.error,
         label: 'Repeat Password',
         error: 'Passwords must be equal',
-        type: 'password'
+        type: TypeFormControl.password
     }
     itemPassword2.html = getinput(itemPassword2)
 
@@ -108,7 +107,7 @@ export function getSignup() {
 
     const templateBtn = Handlebars.compile(buttonTemplate)
 
-    const btnSignUp = templateBtn({
+    const btnSignUp: String = templateBtn({
         name: 'Sign Up',
         id: 'btn-sign-up',
         type: 'submit',

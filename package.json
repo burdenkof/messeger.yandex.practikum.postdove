@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "parcel ./static/index.html --open",
     "build": "parcel build ./static/index.html",
-    "start": "node ./src/server.js"
+    "start": "node ./src/server.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.15.3",
     "parcel": "^2.8.3",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "postcss": "^8.4.21"

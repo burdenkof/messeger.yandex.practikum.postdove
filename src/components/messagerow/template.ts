@@ -1,4 +1,4 @@
-export const  messageRowTemplate =
+export const  messageRowTemplate: String =
 `
 <div class="message-list_one-row {{item.type}}">
     <div class="message-list_one-row_baloon">

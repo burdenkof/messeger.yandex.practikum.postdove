@@ -1,31 +1,32 @@
-import Handlebars from "handlebars";
-import { loginTemplate } from "./template.js";
-import { buttonTemplate } from "../../components/button/template.js";
-import { getinput } from "../../components/input/input.js";
+
+import { loginTemplate } from "./template";
+import { buttonTemplate } from "../../components/button/template";
+import { getinput, inputState, StatusFormControl, TypeFormControl } from "../../components/input/input";
 
 export function getLogin() {
 
+    const Handlebars = require("handlebars")
     const template = Handlebars.compile(loginTemplate)
 
-    const inputs = [];
+    const inputs: inputState[] = [];
     //Авторизация (с формой, имена полей: login, password).  
-    const itemLogin = {
+    const itemLogin: inputState = {
         name: 'login',
         placeholder: 'phone or email',
-        status: 'succcess',
+        status: StatusFormControl.success,
         label: 'Username',
         error: '',
-        type: 'text'
+        type: TypeFormControl.text
     }
     itemLogin.html = getinput(itemLogin)
 
-    const itemPassword = {
+    const itemPassword: inputState = {
         name: 'password',
-        status: 'error',
+        status: StatusFormControl.error,
         label: 'Password',
         placeholder: '',
         error: 'Wrong user name or password',
-        type: 'password'
+        type: TypeFormControl.password
     }
     itemPassword.html = getinput(itemPassword)
 

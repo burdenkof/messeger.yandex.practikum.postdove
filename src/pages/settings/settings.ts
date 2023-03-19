@@ -1,13 +1,22 @@
-import Handlebars from "handlebars";
-import { changePasswordTemplate, settingsTemplate } from "./template.js";
-import { settingsEditTemplate } from "./template.js";
-import { buttonTemplate } from "../../components/button/template.js";
-import { getinput } from "../../components/input/input.js";
+import { changePasswordTemplate, settingsTemplate } from "./template";
+import { settingsEditTemplate } from "./template";
+import { buttonTemplate } from "../../components/button/template";
+import { getinput, inputState, StatusFormControl, TypeFormControl } from "../../components/input/input";
 
-export function getSettings(type = 'settings') {
+export type profileInfo = {
+    firstName: String,
+    secondName: String,
+    phone: String,
+    email: String,
+    displayName: String,
+    login: String,
+    password: String
+}
 
-    let setTemplate = settingsTemplate
+export function getSettings(type: String = 'settings') {
 
+    let setTemplate: String = settingsTemplate
+    const Handlebars = require("handlebars")
     if (type == 'settings-edit') {
         setTemplate = settingsEditTemplate
     }
@@ -16,7 +25,7 @@ export function getSettings(type = 'settings') {
     }
     const template = Handlebars.compile(setTemplate)
 
-    const currentUser = {
+    const currentUser: profileInfo = {
         firstName: 'Whill',
         secondName: 'Smith',
         phone: '+7 (927) 999-99-99',
@@ -25,103 +34,105 @@ export function getSettings(type = 'settings') {
         login: 'burdenkof',
         password: 'dtdtmyytt45m'
     }
-    let inputs = [];
+    let inputs: inputState[] = [];
+
     if (type == 'change-password') {
-        let itemCurrentPassword = {
+        const itemCurrentPassword: inputState = {
             name: 'current_password',
             placeholder: '',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'Current password',
             error: '',
-            type: 'password'
+            type: TypeFormControl.password
         }
         itemCurrentPassword.html = getinput(itemCurrentPassword)
+        
         inputs.push(itemCurrentPassword)
 
-        let itemNewPassword = {
+        const itemNewPassword: inputState = {
             name: 'new_password',
             placeholder: '',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'New password',
             error: '',
-            type: 'password'
+            type: TypeFormControl.password
         }
         itemNewPassword.html = getinput(itemNewPassword)
 
         inputs.push(itemNewPassword)
 
-        let itemNewPassword2 = {
+        const itemNewPassword2: inputState = {
             name: 'new_password2',
             placeholder: '',
-            status: 'error',
+            status: StatusFormControl.error,
             label: 'Repeat password',
             error: 'Passwords must be equal',
-            type: 'password'
+            type: TypeFormControl.password
         }
         itemNewPassword2.html = getinput(itemNewPassword2)
         inputs.push(itemNewPassword2)
     } else {
         // Имена полей для изменения информации о пользователе: first_name, second_name, display_name, login, email, phone;
-        let itemFirstName = {
+        const itemFirstName: inputState = {
             name: 'first_name',
             placeholder: 'Jonh',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'First name',
             error: '',
-            type: 'text'
+            type: TypeFormControl.text
         }
         itemFirstName.html = getinput(itemFirstName)
 
 
-        let itemSecondName = {
+        const itemSecondName: inputState = {
             name: 'second_name',
             placeholder: 'Smith',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'Second name',
             error: '',
-            type: 'text'
+            type: TypeFormControl.text
         }
         itemSecondName.html = getinput(itemSecondName)
 
 
-        let itemDisplayName = {
+        const itemDisplayName: inputState = {
             name: 'display_name',
             placeholder: 'Jo',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'Nick',
             error: '',
-            type: 'text'
+            type: TypeFormControl.text
         }
         itemDisplayName.html = getinput(itemDisplayName)
 
-        let itemLogin = {
+        const itemLogin: inputState = {
             name: 'login',
             placeholder: 'Joker',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'Login',
             error: '',
-            type: 'text'
+            type: TypeFormControl.text
         }
         itemLogin.html = getinput(itemLogin)
 
-        let itemEmail = {
+        const itemEmail: inputState = {
             name: 'email',
             placeholder: 'box@domain.com',
-            status: 'error',
+            status: StatusFormControl.error,
             label: 'Email',
             error: 'Wrong email',
-            type: 'email'
+            type: TypeFormControl.email
         }
         itemEmail.html = getinput(itemEmail)
 
 
-        let itemPhone = {
+        const itemPhone: inputState = {
             name: 'phone',
             placeholder: '+7 (927) 999-99-99',
-            status: 'success',
+            status: StatusFormControl.success,
             label: 'Phone',
             error: '',
-            type: 'text'
+            type: TypeFormControl.text
         }
         itemPhone.html = getinput(itemPhone)
 
@@ -135,19 +146,19 @@ export function getSettings(type = 'settings') {
     }
     const templateBtn = Handlebars.compile(buttonTemplate)
 
-    let btnEdit = templateBtn({
+    const btnEdit:String = templateBtn({
         name: 'Edit',
         id: 'btn-edit-settings',
         type: 'submit',
         onclick: `window.location.href='/#settings-edit'`
     })
-    let btnChangePassword = templateBtn({
+    const btnChangePassword:String  = templateBtn({
         name: 'Change pass',
         id: 'btn-change-password',
         type: 'button',
         onclick: `window.location.href='/#change-password'`
     })
-    let btnSave = templateBtn({
+    const btnSave:String  = templateBtn({
         name: 'Save',
         id: 'btn-save',
         type: 'submit',
