@@ -1,4 +1,4 @@
-import { chatRow, getChatRow } from "./components/chatrow/chatrow";
+import { chatRow } from "./components/chatrow/chatrow";
 import { pagelist } from "./pages/pagelist/pagelist";
 import { getChatList } from "./pages/chatlist/chatlist";
 import { getLogin } from "./pages/login/login";

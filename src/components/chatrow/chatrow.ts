@@ -7,7 +7,7 @@ export type chatRow = {
     lastText: String,
     avatar?: String
 }
-export const getChatRow = (item: chatRow) => {
+export const getChatRow= (item: chatRow): String => {
 
     const Handlebars = require("handlebars")
     const template = Handlebars.compile(chatRowTemplate)
