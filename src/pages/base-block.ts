@@ -1,4 +1,4 @@
-import  EventBus from "../utils/event-bus";
+import EventBus from "../utils/event-bus";
 import { v4 as makeUUID } from 'uuid';
 
 class Block {
@@ -15,16 +15,16 @@ class Block {
 
     _props: any = {}
     props: any = {}
-    childs: { [key: string]: Block }
+    childs: { [key: string]: Block | Block[] }
     _id: string
     eventBus: () => EventBus;
     _getChilds(propsAndChilds: any): any {
-        const childs: { [key: string]: Block } = {};
+        const childs: { [key: string]: Block | Block[] } = {};
         const props: any = {};
         let key: keyof typeof propsAndChilds;
         for (key in propsAndChilds) {
             const value = propsAndChilds[key]
-            if (value instanceof Block) {
+            if (value instanceof Block || Array.isArray(value)) {
                 childs[key] = value;
             } else {
                 props[key] = value;
@@ -38,25 +38,40 @@ class Block {
         const Templator = Handlebars.compile(template)
         const propsAndStubs = { ...props }
 
-        let key: keyof typeof props;
-        for (key in props) {
+
+        for (const key in this.props) {
             const child = props[key]
-            if (child instanceof Block) {
-                propsAndStubs[key] = `<div data-id="${child._id}"></div>`
-            }  
+            if (Array.isArray(child)) {
+                propsAndStubs[key] = child.map(row => `<div data-id="${row._id}"></div>`);
+            } else if (child instanceof Block) {
+                propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+
+            }
         }
 
         const fragment: HTMLTemplateElement = this._createDocumentElement('template') as HTMLTemplateElement
 
-        fragment.innerHTML = Templator({...propsAndStubs})
+        fragment.innerHTML = Templator({ ...propsAndStubs })
+        const replaceChild = (row: Block) => {
 
+            const _el = fragment.content.querySelector(`[data-id="${row._id}"]`)
+
+            if (!_el) {
+                console.log('id ' + row._id + ' not found')
+                return
+            }
+            console.log(row)
+            row.getContent()?.append(...Array.from(_el.childNodes))
+
+            _el.replaceWith(row.getContent()!)
+        }
 
         for (const keyChilds in this.childs) {
             const child = this.childs[keyChilds]
-            const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-
-            if (stub) {
-                stub.replaceWith(child.getContent())
+            if (Array.isArray(child)) {
+                child.forEach(replaceChild);
+            } else {
+                replaceChild(child);
             }
         }
 
@@ -110,7 +125,11 @@ class Block {
         this.componentDidMount()
         for (const keyChilds in this.childs) {
             const child = this.childs[keyChilds]
-            child.dispatchComponentDidMount();
+            if (Array.isArray(child)) {
+                child.map(row => row instanceof Block? row.dispatchComponentDidMount():'')
+            } else {
+                child.dispatchComponentDidMount()
+            }
         }
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
@@ -134,7 +153,7 @@ class Block {
         return true
     }
 
-    setProps (nextProps: any) {
+    setProps(nextProps: any) {
         if (!nextProps) {
             return
         }
@@ -199,4 +218,4 @@ class Block {
         element.style.display = 'none'
     }
 }
-export default  Block
+export default Block
