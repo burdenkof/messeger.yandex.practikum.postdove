@@ -1,18 +1,18 @@
 import { chatRow } from "./components/chatrow/chatrow";
 import { renderPagelist } from "./pages/pagelist/pagelist";
 import { getChatList } from "./pages/chatlist/chatlist";
-import { getLogin } from "./pages/login/login";
 import { getSettings } from "./pages/settings/settings";
 import { getErrorPage } from "./pages/errorpage/errorpage";
 import { getSignup } from "./pages/signup/signup";
 import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { Nullable } from "./utils/renderDOM";
+import { renderLogin } from "./pages/login/login";
 export const getPage = (url: String, root:Nullable<HTMLDivElement>) => {
   switch (url) {
 
     case "#error-404": return getErrorPage()
     case "#error-500": return getErrorPage(500, 'Something broke', 'We are already fixing')
-    case "#login": return getLogin()
+    case "#login": return renderLogin(root)
     case "#signup": return getSignup()
 
     case "#settings": return getSettings()

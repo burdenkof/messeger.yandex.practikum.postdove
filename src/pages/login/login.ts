@@ -1,53 +1,56 @@
 
 import { loginTemplate } from "./template";
-import { buttonTemplate } from "../../components/button/template";
-import { getinput, inputState, StatusFormControl, TypeFormControl } from "../../components/input/input";
+import inputComponent, { getinput, inputState, StatusFormControl, TypeFormControl } from "../../components/input/input";
+import Block from "../base-block";
+import buttonComponent from "../../components/button/button";
+import { Nullable, render } from "../../utils/renderDOM";
 
-export function getLogin() {
+class pageLogin extends Block {
+    constructor(props: any) {
 
-    const Handlebars = require("handlebars")
-    const template = Handlebars.compile(loginTemplate)
+        super("div", props);
+    }
 
-    const inputs: inputState[] = [];
-    //Авторизация (с формой, имена полей: login, password).  
-    const itemLogin: inputState = {
+    render() {
+        return this.compile(loginTemplate, this.props);
+    }
+}
+
+export function renderLogin(root: Nullable<HTMLDivElement>) {
+
+    const itemLogin: inputComponent = new inputComponent({
         name: 'login',
         placeholder: 'phone or email',
         status: StatusFormControl.success,
         label: 'Username',
         error: '',
         type: TypeFormControl.text
-    }
-    itemLogin.html = getinput(itemLogin)
+    })
 
-    const itemPassword: inputState = {
+
+    const itemPassword: inputComponent = new inputComponent({
         name: 'password',
         status: StatusFormControl.error,
         label: 'Password',
         placeholder: '',
-        error: 'Wrong user name or password',
+        error: '',
         type: TypeFormControl.password
-    }
-    itemPassword.html = getinput(itemPassword)
-
-    inputs.push(itemLogin)
-    inputs.push(itemPassword)
-
-    const templateBtn = Handlebars.compile(buttonTemplate)
-
-    const btnSignIn = templateBtn({
+    })
+    const btnSignIn: buttonComponent = new buttonComponent({
         name: 'Sign In',
         id: 'btn-sign-in',
         type: 'submit',
         onclick: ''
     })
-    const btnSignUp = templateBtn({
+    const btnSignUp: buttonComponent = new buttonComponent({
         name: 'Sign Up',
         id: 'btn-sign-up',
         type: 'button',
         onclick: `window.location.href='/#signup'`
     })
+    const page = new pageLogin({
+        itemLogin, itemPassword, btnSignIn, btnSignUp
+    })
+    render(page, root)
 
-
-    return template({ inputs: inputs, btnSignIn: btnSignIn, btnSignUp: btnSignUp })
 }

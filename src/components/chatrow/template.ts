@@ -1,4 +1,4 @@
-export const  chatRowTemplate =
+export const  chatRowTemplate: string =
 `<div class="chat-list_one-row">
     <div class="chat-list_one-row_avatar" >
         

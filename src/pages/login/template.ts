@@ -1,4 +1,4 @@
-export const  loginTemplate =
+export const  loginTemplate: string =
 `
 
 <div class="logo-big" > 
@@ -8,9 +8,8 @@ export const  loginTemplate =
 <div class="pages-login">
     <form name="form1" id="form1" action="/#chatlist" method="post">
         <h1 class="form-main-title">Login</h1>
-            {{#each inputs}}
-                {{{html}}}
-            {{/each}}
+                {{{itemLogin}}}
+                {{{itemPassword}}}
         <div class="form-buttons inline">
             {{{btnSignIn}}}
             {{{btnSignUp}}}
