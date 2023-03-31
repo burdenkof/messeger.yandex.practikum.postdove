@@ -1,12 +1,13 @@
 import { chatRow } from "./components/chatrow/chatrow";
-import { pagelist } from "./pages/pagelist/pagelist";
+import { renderPagelist } from "./pages/pagelist/pagelist";
 import { getChatList } from "./pages/chatlist/chatlist";
 import { getLogin } from "./pages/login/login";
 import { getSettings } from "./pages/settings/settings";
 import { getErrorPage } from "./pages/errorpage/errorpage";
 import { getSignup } from "./pages/signup/signup";
 import { messageRow, messageType } from "./components/messagerow/messagerow";
-export const getPage = (url: String) => {
+import { Nullable } from "./utils/renderDOM";
+export const getPage = (url: String, root:Nullable<HTMLDivElement>) => {
   switch (url) {
 
     case "#error-404": return getErrorPage()
@@ -49,6 +50,6 @@ export const getPage = (url: String) => {
 
 
     default:
-      return pagelist()
+      return renderPagelist(root)
   }
 }

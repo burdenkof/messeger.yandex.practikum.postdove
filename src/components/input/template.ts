@@ -1,4 +1,4 @@
-export const  inputTemplate: String =
+export const  inputTemplate: string =
 `
 <div class="form-control {{item.status}}">
     <label class="form-input_label" for="input-{{item.name}}" >{{item.label}}</label>

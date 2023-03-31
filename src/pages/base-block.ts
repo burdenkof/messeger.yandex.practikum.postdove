@@ -1,4 +1,4 @@
-import { EventBus } from "./event-bus";
+import  EventBus from "../utils/event-bus";
 import { v4 as makeUUID } from 'uuid';
 
 class Block {
@@ -19,42 +19,44 @@ class Block {
     _id: string
     eventBus: () => EventBus;
     _getChilds(propsAndChilds: any): any {
-        const children: { [key: string]: Block } = {};
+        const childs: { [key: string]: Block } = {};
         const props: any = {};
         let key: keyof typeof propsAndChilds;
         for (key in propsAndChilds) {
             const value = propsAndChilds[key]
             if (value instanceof Block) {
-                children[key] = value;
+                childs[key] = value;
             } else {
                 props[key] = value;
             }
         }
 
-        return { children, props };
+        return { childs, props };
     }
     compile(template: string, props: any): DocumentFragment {
         const Handlebars = require("handlebars")
         const Templator = Handlebars.compile(template)
-        const propsAndStubs = { ...props };
+        const propsAndStubs = { ...props }
 
         let key: keyof typeof props;
         for (key in props) {
             const child = props[key]
-            propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+            if (child instanceof Block) {
+                propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+            }  
         }
 
-        const fragment: HTMLTemplateElement = this._createDocumentElement('template') as HTMLTemplateElement;
+        const fragment: HTMLTemplateElement = this._createDocumentElement('template') as HTMLTemplateElement
 
-        fragment.innerHTML = Templator.compile(template, propsAndStubs);
+        fragment.innerHTML = Templator({...propsAndStubs})
 
 
         for (const keyChilds in this.childs) {
             const child = this.childs[keyChilds]
-            const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+            const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
 
             if (stub) {
-                stub.replaceWith(child.getContent());
+                stub.replaceWith(child.getContent())
             }
         }
 
@@ -69,7 +71,7 @@ class Block {
        */
     constructor(tagName: string = "div", propsAndChilds: object = {}) {
 
-        const eventBus: EventBus = new EventBus();
+        const eventBus = new EventBus()
         this.tagName = tagName
 
         const { childs, props } = this._getChilds(propsAndChilds);
@@ -77,9 +79,9 @@ class Block {
         this.childs = childs;
         this._id = makeUUID();
 
-        this._props = props
+        this._props = propsAndChilds
 
-        this.props = this._makePropsProxy({ ...props, __id: this._id });
+        this.props = this._makePropsProxy({ ...propsAndChilds, __id: this._id });
 
         this.eventBus = () => eventBus;
 
@@ -89,14 +91,14 @@ class Block {
 
     _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
+        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
+        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
     }
 
     _createResources() {
 
-        this._element = this._createDocumentElement(this.tagName);
+        this._element = this._createDocumentElement(this.tagName)
     }
 
     init() {
@@ -110,7 +112,7 @@ class Block {
             const child = this.childs[keyChilds]
             child.dispatchComponentDidMount();
         }
-        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
 
 
@@ -121,40 +123,39 @@ class Block {
     }
 
     _componentDidUpdate(oldProps: any, newProps: any) {
-        const response = this.componentDidUpdate(oldProps, newProps);
+        const response = this.componentDidUpdate(oldProps, newProps)
         if (response === true) {
-            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+            this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
         }
     }
 
 
     componentDidUpdate(oldProps: any, newProps: any) {
-        return true;
+        return true
     }
 
-    setProps = (nextProps: any) => {
+    setProps (nextProps: any) {
         if (!nextProps) {
-            return;
+            return
         }
 
-        Object.assign(this.props, nextProps);
-    };
+        Object.assign(this.props, nextProps)
+    }
 
     get element() {
         return this._element;
     }
 
     _render() {
-        const block = this.render(); // render теперь возвращает DocumentFragment
+        const block = this.render()
 
 
-        this._element.innerHTML = ''; // удаляем предыдущее содержимое
+        this._element.innerHTML = ''
 
         this._element.appendChild(block);
 
     }
 
-    // Может переопределять пользователь, необязательно трогать
     render(): any { }
 
     getContent() {
@@ -198,3 +199,4 @@ class Block {
         element.style.display = 'none'
     }
 }
+export default  Block

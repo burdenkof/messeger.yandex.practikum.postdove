@@ -1,6 +1,7 @@
 import { getPage } from "./route";
+import { Nullable } from "./utils/renderDOM";
 
-type Nullable<T> = T | null;
+
 
 window.addEventListener("hashchange", () => changeHash())
 
@@ -11,8 +12,8 @@ const root: Nullable<HTMLDivElement> = document.getElementById('root') as HTMLDi
 async function changeHash() {
   if(root === null) return
   const str = document.location.hash
-  const html = await getPage(str)
-  root.innerHTML = html
+   await getPage(str, root)
+ 
   const form: Nullable<HTMLFormElement> = document.getElementById('form1') as HTMLFormElement
   if (form !== null) {
     form.addEventListener("submit", onSubmit, true);
