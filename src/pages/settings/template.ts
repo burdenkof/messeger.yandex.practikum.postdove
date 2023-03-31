@@ -1,4 +1,4 @@
-export const  settingsTemplate =
+export const  settingsTemplate:string =
 `
 <div class="logo-big" > 
     
@@ -23,41 +23,3 @@ export const  settingsTemplate =
 
 `
 
-export const  settingsEditTemplate =
-`
-<div class="logo-big" > 
-    
-</div>
-
-<div class="pages-login  pages-edit-settings">
-    <form name="form1" id="form1"  action="/#settings" method="post">
-        <h1 class="form-main-title">Edit profile</h1>
-            {{#each inputs}}
-                {{{html}}}
-            {{/each}}
-        <div class="form-buttons inline">
-            {{{btnSave}}}
-        </div>
-    </form>
-</div>
-
-`
-export const  changePasswordTemplate =
-`
-<div class="logo-big" > 
-    
-</div>
-
-<div class="pages-login  pages-change-password">
-    <form name="form1" id="form1"  action="/#settings" method="post">
-        <h1 class="form-main-title">Change password</h1>
-            {{#each inputs}}
-                {{{html}}}
-            {{/each}}
-        <div class="form-buttons inline">
-            {{{btnSave}}}
-        </div>
-    </form>
-</div>
-
-`

@@ -1,23 +1,25 @@
 import { chatRow } from "./components/chatrow/chatrow";
 import { renderPagelist } from "./pages/pagelist/pagelist";
 import { getChatList } from "./pages/chatlist/chatlist";
-import { getSettings } from "./pages/settings/settings";
-import { getErrorPage } from "./pages/errorpage/errorpage";
+import { renderSettings } from "./pages/settings/settings";
+import { renderErrorPage } from "./pages/errorpage/errorpage";
 import { renderSignup } from "./pages/signup/signup";
 import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { Nullable } from "./utils/renderDOM";
 import { renderLogin } from "./pages/login/login";
+import { renderChangePassword } from "./pages/settings/change-password/change-password";
+import { renderSettingsEdit } from "./pages/settings/settings-edit/settings-edit";
 export const getPage = (url: String, root:Nullable<HTMLDivElement>) => {
   switch (url) {
 
-    case "#error-404": return getErrorPage()
-    case "#error-500": return getErrorPage(500, 'Something broke', 'We are already fixing')
+    case "#error-404": return renderErrorPage(root)
+    case "#error-500": return renderErrorPage(root, 500, 'Something broke', 'We are already fixing')
     case "#login": return renderLogin(root)
     case "#signup": return renderSignup(root)
 
-    case "#settings": return getSettings()
-    case "#settings-edit": return getSettings('settings-edit')
-    case "#change-password": return getSettings('change-password')
+    case "#settings": return renderSettings(root)
+    case "#settings-edit": return renderSettingsEdit(root)
+    case "#change-password": return renderChangePassword(root)
 
 
     case "#chatlist":
