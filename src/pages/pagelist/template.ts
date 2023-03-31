@@ -14,6 +14,7 @@ export const  pagelistTemplate =
             <li><a href="#error-500">Eror 500 ></a></li>
         </ul>
         {{{testInput}}}
+        {{{testBtn}}}
     </nav>
 </div>
 
