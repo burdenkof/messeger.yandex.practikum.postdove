@@ -3,7 +3,7 @@ import { renderPagelist } from "./pages/pagelist/pagelist";
 import { getChatList } from "./pages/chatlist/chatlist";
 import { getSettings } from "./pages/settings/settings";
 import { getErrorPage } from "./pages/errorpage/errorpage";
-import { getSignup } from "./pages/signup/signup";
+import { renderSignup } from "./pages/signup/signup";
 import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { Nullable } from "./utils/renderDOM";
 import { renderLogin } from "./pages/login/login";
@@ -13,7 +13,7 @@ export const getPage = (url: String, root:Nullable<HTMLDivElement>) => {
     case "#error-404": return getErrorPage()
     case "#error-500": return getErrorPage(500, 'Something broke', 'We are already fixing')
     case "#login": return renderLogin(root)
-    case "#signup": return getSignup()
+    case "#signup": return renderSignup(root)
 
     case "#settings": return getSettings()
     case "#settings-edit": return getSettings('settings-edit')

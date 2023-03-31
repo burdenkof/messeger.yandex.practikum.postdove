@@ -7,9 +7,14 @@ export const  signupTemplate =
 <div class="pages-login  pages-edit-settings">
     <form name="form1" id="form1"  action="/#chatlist" method="post">
         <h1 class="form-main-title">Sign up</h1>
-            {{#each inputs}}
-                {{{html}}}
-            {{/each}}
+            {{{itemFirstName}}}
+            {{{itemSecondName}}}
+            {{{itemDisplayName}}}
+            {{{itemLogin}}}
+            {{{itemEmail}}}
+            {{{itemPhone}}}
+            {{{itemPassword}}}
+            {{{itemPassword2}}}
         <div class="form-buttons inline">
             {{{btnSignUp}}}
         </div>

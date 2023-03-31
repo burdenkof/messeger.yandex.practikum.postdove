@@ -5,6 +5,7 @@ export function render(block: Block, root: Nullable<HTMLDivElement>) {
      
 
     if (root !== null) {
+        root.innerHTML = ''
         root.appendChild(block.getContent());
 
         block.dispatchComponentDidMount();

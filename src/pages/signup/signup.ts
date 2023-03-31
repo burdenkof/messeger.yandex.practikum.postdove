@@ -1,121 +1,113 @@
+import buttonComponent from "../../components/button/button";
+import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input";
+import { Nullable, render } from "../../utils/renderDOM";
+import Block from "../base-block";
 import { signupTemplate } from "./template";
-import { buttonTemplate } from "../../components/button/template";
-import { getinput, inputState,StatusFormControl,   TypeFormControl} from "../../components/input/input";
+ 
+ 
+class pageSignup extends Block{
+    constructor(props: any){
+        super('div',props)
+    }
+    render(){
+        return this.compile(signupTemplate, this.props)
+    }
+}
+export function renderSignup(root:  Nullable<HTMLDivElement>) {
+ 
 
-export function getSignup() {
-
-    const Handlebars = require("handlebars")
-    const template = Handlebars.compile(signupTemplate)
-
-    const inputs: inputState[] = [];
-    const itemFirstName: inputState = {
+    const itemFirstName: inputComponent = new inputComponent( {
         name: 'first_name',
         placeholder: 'Jonh',
         status: StatusFormControl.success,
         label: 'First name',
         error: '',
         type: TypeFormControl.text
-    }
-    itemFirstName.html = getinput(itemFirstName)
+    })
 
-
-    const itemSecondName: inputState = {
+    const itemSecondName: inputComponent = new inputComponent( {
         name: 'second_name',
         placeholder: 'Smith',
         status: StatusFormControl.success,
         label: 'Second name',
         error: '',
         type: TypeFormControl.text
-    }
-    itemSecondName.html = getinput(itemSecondName)
+    })
 
 
-    const itemDisplayName: inputState = {
+    const itemDisplayName: inputComponent = new inputComponent( {
         name: 'display_name',
         placeholder: 'Jo',
         status: StatusFormControl.success,
         label: 'Nick',
         error: '',
         type: TypeFormControl.text
-    }
-    itemDisplayName.html = getinput(itemDisplayName)
+    })
 
-    const itemLogin: inputState = {
+    const itemLogin: inputComponent = new inputComponent( {
         name: 'login',
         placeholder: 'Joker',
         status: StatusFormControl.success,
         label: 'Login',
         error: '',
         type: TypeFormControl.text
-    }
-    itemLogin.html = getinput(itemLogin)
+    })
 
-    const itemEmail: inputState = {
+    const itemEmail: inputComponent = new inputComponent( {
         name: 'email',
         placeholder: 'box@domain.com',
-        status: StatusFormControl.error,
+        status: StatusFormControl.success,
         label: 'Email',
-        error: 'Wrong email',
+        error: '',
         type: TypeFormControl.email
-    }
-    itemEmail.html = getinput(itemEmail)
+    })
 
 
-    const itemPhone: inputState = {
+    const itemPhone: inputComponent = new inputComponent( {
         name: 'phone',
-        placeholder: '+7 (927) 999-99-99',
+        placeholder: '+7 (999) 999-99-99',
         status: StatusFormControl.success,
         label: 'Phone',
         error: '',
         type: TypeFormControl.text
-    }
-    itemPhone.html = getinput(itemPhone)
+    })
 
-    const itemPassword: inputState = {
+    const itemPassword: inputComponent = new inputComponent( {
         name: 'password',
         placeholder: '',
         status: StatusFormControl.success,
         label: 'Password',
         error: '',
         type: TypeFormControl.password
-    }
-    itemPassword.html = getinput(itemPassword)
+    })
 
-    const itemPassword2: inputState = {
+    const itemPassword2: inputComponent = new inputComponent( {
         name: 'password2',
         placeholder: '',
-        status: StatusFormControl.error,
+        status: StatusFormControl.success,
         label: 'Repeat Password',
-        error: 'Passwords must be equal',
+        error: '',
         type: TypeFormControl.password
-    }
-    itemPassword2.html = getinput(itemPassword2)
+    })
 
-
-
-
-
-    inputs.push(itemFirstName)
-    inputs.push(itemSecondName)
-    inputs.push(itemDisplayName)
-    inputs.push(itemLogin)
-    inputs.push(itemEmail)
-    inputs.push(itemPhone)
-    inputs.push(itemPassword)
-    inputs.push(itemPassword2)
-
-
-    const templateBtn = Handlebars.compile(buttonTemplate)
-
-    const btnSignUp: String = templateBtn({
+    const btnSignUp: buttonComponent = new buttonComponent({
         name: 'Sign Up',
         id: 'btn-sign-up',
         type: 'submit',
         onclick: ''
     })
 
-    return template({
-        inputs: inputs,
-        btnSignUp: btnSignUp
+    const page:pageSignup = new pageSignup({
+        itemFirstName,
+        itemSecondName,
+        itemDisplayName,
+        itemLogin,
+        itemEmail,
+        itemPhone,
+        itemPassword,
+        itemPassword2,
+        btnSignUp
     })
+    render(page, root)
+ 
 }
