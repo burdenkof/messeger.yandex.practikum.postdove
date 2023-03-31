@@ -1,22 +1,36 @@
 import { chatListTemplate } from "./template"
-import { chatRow, getChatRow } from "../../components/chatrow/chatrow"
-import { getMessageRow, messageRow } from "../../components/messagerow/messagerow"
+import chatRowComponent, { chatRow, getChatRow } from "../../components/chatrow/chatrow"
+import messageRowComponent, { getMessageRow, messageRow } from "../../components/messagerow/messagerow"
+import { Nullable, render } from "../../utils/renderDOM"
+import Block from "../base-block"
 
-export const getChatList = (items:chatRow[], messages:messageRow[]) => {
+class pageChatList extends Block {
+    constructor(props: { chats?: chatRowComponent[], messages?: messageRowComponent[] }) {
+        super('div', props)
+    }
+    render() {
+        return this.compile(chatListTemplate, this.props)
+    }
 
-    const Handlebars = require("handlebars")
-    const template = Handlebars.compile(chatListTemplate)
-    
-    
+}
 
-    items.map((item ) =>{
-        item.html = getChatRow(item)
+export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRow[], messageItems: messageRow[]) => {
+
+
+    const chats: chatRowComponent[] = []
+    const messages: messageRowComponent[] = []
+
+    chatItems.map((item: chatRow) => {
+        chats.push(new chatRowComponent(item))
     })
 
-    messages.map((message ) =>{
-        message.html = getMessageRow(message)
+    messageItems.map((item: messageRow) => {
+        messages.push(new messageRowComponent(item))
     })
- 
 
-    return template({items: items, messages: messages})
+
+    const page = new pageChatList({
+        chats, messages
+    })
+    render(page, root)
 }

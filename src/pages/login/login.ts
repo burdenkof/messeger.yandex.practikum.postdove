@@ -1,6 +1,6 @@
 
 import { loginTemplate } from "./template";
-import inputComponent, { getinput, inputState, StatusFormControl, TypeFormControl } from "../../components/input/input";
+import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input";
 import Block from "../base-block";
 import buttonComponent from "../../components/button/button";
 import { Nullable, render } from "../../utils/renderDOM";

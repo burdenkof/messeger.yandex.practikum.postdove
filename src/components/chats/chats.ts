@@ -7,6 +7,12 @@ export type buttonState = {
     type?: string,
     onclick?: string
 }
+export const getinput = (input: buttonState) => {
+
+    const Handlebars = require("handlebars")
+    const template = Handlebars.compile(buttonTemplate)
+    return template({ item: input })
+}
 
 class buttonComponent extends Block {
     constructor(props: buttonState) {

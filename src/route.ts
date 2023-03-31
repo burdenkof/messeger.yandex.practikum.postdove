@@ -1,6 +1,6 @@
 import { chatRow } from "./components/chatrow/chatrow";
 import { renderPagelist } from "./pages/pagelist/pagelist";
-import { getChatList } from "./pages/chatlist/chatlist";
+import { renderChatList } from "./pages/chatlist/chatlist";
 import { renderSettings } from "./pages/settings/settings";
 import { renderErrorPage } from "./pages/errorpage/errorpage";
 import { renderSignup } from "./pages/signup/signup";
@@ -48,7 +48,7 @@ export const getPage = (url: String, root:Nullable<HTMLDivElement>) => {
 
       }
 
-      return getChatList(list, messages)
+      return renderChatList(root, list, messages)
 
 
     default:

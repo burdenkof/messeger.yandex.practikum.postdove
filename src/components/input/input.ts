@@ -11,13 +11,6 @@ export type inputState = {
     type?: TypeFormControl,
     html?: String
 }
-export const getinput = (input: inputState) => {
-
-    const Handlebars = require("handlebars")
-    const template = Handlebars.compile(inputTemplate)
-    return template({ item: input })
-}
-
 class inputComponent extends Block {
     constructor(props: inputState) {
         super("div", props);
