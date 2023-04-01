@@ -1,8 +1,8 @@
 import { chatListTemplate } from "./template"
-import chatRowComponent, { chatRow, getChatRow } from "../../components/chatrow/chatrow"
-import messageRowComponent, { getMessageRow, messageRow } from "../../components/messagerow/messagerow"
+import chatRowComponent, { chatRow } from "../../components/chatrow/chatrow"
+import messageRowComponent, { messageRow } from "../../components/messagerow/messagerow"
 import { Nullable, render } from "../../utils/renderDOM"
-import Block from "../base-block"
+import Block from "../../utils/base-block"
 
 class pageChatList extends Block {
     constructor(props: { chats?: chatRowComponent[], messages?: messageRowComponent[] }) {

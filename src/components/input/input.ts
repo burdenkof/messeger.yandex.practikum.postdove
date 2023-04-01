@@ -1,15 +1,17 @@
-import Block from '../../pages/base-block'
+import Block from '../../utils/base-block'
 import { inputTemplate } from './template'
 export enum StatusFormControl { success = 'success', error = 'error'}
 export enum TypeFormControl { text = 'text', password = 'password', email = 'email'}
 export type inputState = {
-    name?: String,
-    placeholder?: String,
+    name?: string,
+    placeholder?: string,
     status?: StatusFormControl,
-    label?: String,
-    error?: String,
+    label?: string,
+    error?: string,
     type?: TypeFormControl,
-    html?: String
+    pattern?: string,
+    events?:any,
+    value?: string
 }
 class inputComponent extends Block {
     constructor(props: inputState) {

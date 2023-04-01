@@ -1,7 +1,7 @@
 import { settingsTemplate } from "./template";
 import { Nullable, render } from "../../utils/renderDOM";
 import buttonComponent from "../../components/button/button";
-import Block from "../base-block";
+import Block from "../../utils/base-block";
 
 export type profileInfo = {
     firstName: String,

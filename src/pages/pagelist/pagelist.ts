@@ -1,5 +1,5 @@
 import { Nullable, render } from "../../utils/renderDOM";
-import Block from "../base-block";
+import Block from "../../utils/base-block";
 import { pagelistTemplate } from "./template";
 
 class pageList extends Block {

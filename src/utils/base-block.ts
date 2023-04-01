@@ -1,4 +1,4 @@
-import EventBus from "../utils/event-bus";
+import EventBus from "./event-bus";
 import { v4 as makeUUID } from 'uuid';
 
 class Block {
@@ -57,10 +57,8 @@ class Block {
             const _el = fragment.content.querySelector(`[data-id="${row._id}"]`)
 
             if (!_el) {
-                console.log('id ' + row._id + ' not found')
                 return
             }
-            console.log(row)
             row.getContent()?.append(...Array.from(_el.childNodes))
 
             _el.replaceWith(row.getContent()!)
@@ -126,7 +124,7 @@ class Block {
         for (const keyChilds in this.childs) {
             const child = this.childs[keyChilds]
             if (Array.isArray(child)) {
-                child.map(row => row instanceof Block? row.dispatchComponentDidMount():'')
+                child.map(row => row instanceof Block ? row.dispatchComponentDidMount() : '')
             } else {
                 child.dispatchComponentDidMount()
             }
@@ -170,9 +168,30 @@ class Block {
 
 
         this._element.innerHTML = ''
-
+        this._removeEvents();
         this._element.appendChild(block);
+        this._addEvents();
+    }
+    private _removeEvents() {
+        const { events = {} } = this.props;
 
+        Object.keys(events).forEach(eventName => {
+            this._element.removeEventListener(eventName, events[eventName])
+        });
+    }
+    private _addEvents() {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach((eventName: string) => {
+            if (eventName === 'focus' || eventName === 'blur' || eventName === 'input' || eventName === 'keyup') {
+                const temp = this._element.querySelector(`input`)
+                if (temp !== null) {
+                    temp.addEventListener(eventName, events[eventName]);
+                    return
+                }
+            }
+            this._element.addEventListener(eventName, events[eventName]);
+        })
     }
 
     render(): any { }

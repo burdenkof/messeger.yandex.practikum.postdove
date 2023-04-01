@@ -1,4 +1,4 @@
-import Block from '../../pages/base-block'
+import Block from '../../utils/base-block'
 import { buttonTemplate } from './template'
  
 export type buttonState = {

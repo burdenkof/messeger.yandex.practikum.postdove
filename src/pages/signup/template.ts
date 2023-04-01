@@ -5,7 +5,7 @@ export const  signupTemplate =
 </div>
 
 <div class="pages-login  pages-edit-settings">
-    <form name="form1" id="form1"  action="/#chatlist" method="post">
+    <form name="form1"    action="/#chatlist" method="post">
         <h1 class="form-main-title">Sign up</h1>
             {{{itemFirstName}}}
             {{{itemSecondName}}}

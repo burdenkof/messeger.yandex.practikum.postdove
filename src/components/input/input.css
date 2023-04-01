@@ -32,6 +32,7 @@
     }
     .form-control_error{
         color: #FF0A0A;
+        font-size:11px
     }
     .form-control_input:hover, .form-control_input:focus{
  

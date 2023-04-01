@@ -1,9 +1,10 @@
 import { changePasswordTemplate } from "./template";
-import { Nullable, render } from "../../../utils/renderDOM";
-import Block from "../../base-block";
+import { getFormData, Nullable, pregCheck, render } from "../../../utils/renderDOM";
+import Block from "../../../utils/base-block";
 import { profileInfo } from "../settings";
 import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
+import { PregErrors, PregValidate } from "../../../utils/pregValidates";
 
 class pageChangePassword extends Block {
     constructor(props: any) {
@@ -17,7 +18,59 @@ class pageChangePassword extends Block {
 
 export function renderChangePassword(root: Nullable<HTMLDivElement>) {
 
+    const validate = (e: Event) => {
+        if (e.target === null) return
+       
+        let data: any
+        if (e.target instanceof HTMLFormElement) {
+            e.preventDefault()
+            data = getFormData(e.target)
+        } else {
+            const target = e.target as HTMLElement
+            const form: HTMLFormElement | null = target.closest('form')
+            if (form === null) return
+            data = getFormData(form)
+        }
+        let errors = 0
 
+    
+
+        if (data.new_password && !pregCheck(PregValidate.password, data.new_password)) {
+            errors++
+            itemNewPassword.setProps({
+                status: StatusFormControl.error,
+                error: PregErrors.password,
+                value: data.new_password
+            })
+        } else {
+            itemNewPassword.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.new_password
+            })
+        }
+
+
+        if (  data.new_password2 != data.new_password) {
+            errors++
+            itemNewPassword2.setProps({
+                status: StatusFormControl.error,
+                error: 'Пароли должны совпадать',
+                value: data.new_password2
+            })
+        } else {
+            itemNewPassword2.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.new_password2
+            })
+        }
+
+        if (e.target instanceof HTMLFormElement && errors == 0) {
+            console.log(data)
+        }
+
+    }
 
     const currentUser: profileInfo = {
         firstName: 'Whill',
@@ -34,6 +87,7 @@ export function renderChangePassword(root: Nullable<HTMLDivElement>) {
         placeholder: '',
         status: StatusFormControl.success,
         label: 'Current password',
+        pattern:PregValidate.password,
         error: '',
         type: TypeFormControl.password
     })
@@ -45,16 +99,28 @@ export function renderChangePassword(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'New password',
         error: '',
-        type: TypeFormControl.password
+        type: TypeFormControl.password,
+        pattern:PregValidate.password,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
     const itemNewPassword2: inputComponent = new inputComponent({
         name: 'new_password2',
         placeholder: '',
-        status: StatusFormControl.error,
+        status: StatusFormControl.success,
         label: 'Repeat password',
-        error: 'Passwords must be equal',
-        type: TypeFormControl.password
+        error: '',
+        type: TypeFormControl.password,
+        pattern:PregValidate.password,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
 
@@ -71,7 +137,12 @@ export function renderChangePassword(root: Nullable<HTMLDivElement>) {
         itemNewPassword,
         itemNewPassword2,
         currentUser,
-        btnSave
+        btnSave,
+        events: {
+            submit: (e: SubmitEvent) => {
+                validate(e)
+            }
+        }
     })
     render(page, root)
 }

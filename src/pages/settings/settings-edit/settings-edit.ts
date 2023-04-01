@@ -1,9 +1,10 @@
 import { settingsEditTemplate } from "./template";
-import { Nullable, render } from "../../../utils/renderDOM";
-import Block from "../../base-block";
+import { getFormData, Nullable, pregCheck, render } from "../../../utils/renderDOM";
+import Block from "../../../utils/base-block";
 import { profileInfo } from "../settings";
 import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
+import { PregErrors, PregValidate } from "../../../utils/pregValidates";
 
 class pageSettingsEdit extends Block {
     constructor(props: any) {
@@ -18,7 +19,88 @@ class pageSettingsEdit extends Block {
 export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
 
 
+    const validate = (e: Event) => {
+        if (e.target === null) return
 
+        let data: any
+        if (e.target instanceof HTMLFormElement) {
+            e.preventDefault()
+            data = getFormData(e.target)
+        } else {
+            const target = e.target as HTMLElement
+            const form: HTMLFormElement | null = target.closest('form')
+            if (form === null) return
+            data = getFormData(form)
+        }
+        let errors = 0
+
+        if (data.first_name && !pregCheck(PregValidate.names, data.first_name)) {
+            errors++
+            itemFirstName.setProps({
+                status: StatusFormControl.error,
+                error: PregErrors.names,
+                value: data.first_name
+            })
+        } else {
+            itemFirstName.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.first_name
+            })
+        }
+
+        if (data.second_name && !pregCheck(PregValidate.names, data.second_name)) {
+            errors++
+            itemSecondName.setProps({
+                status: StatusFormControl.error,
+                error: PregErrors.names,
+                value: data.second_name
+            })
+        } else {
+            itemSecondName.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.second_name
+            })
+        }
+
+
+        if (data.display_name && !pregCheck(PregValidate.names, data.display_name)) {
+            errors++
+            itemDisplayName.setProps({
+                status: StatusFormControl.error,
+                error: PregErrors.names,
+                value: data.display_name
+            })
+        } else {
+            itemDisplayName.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.display_name
+            })
+        }
+
+
+        if (data.login && !pregCheck(PregValidate.login, data.login)) {
+            errors++
+            itemLogin.setProps({
+                status: StatusFormControl.error,
+                error: PregErrors.login,
+                value: data.login
+            })
+        } else {
+            itemLogin.setProps({
+                status: StatusFormControl.success,
+                error: '',
+                value: data.login
+            })
+        }
+
+        if (e.target instanceof HTMLFormElement && errors == 0) {
+            console.log(data)
+        }
+
+    }
     const currentUser: profileInfo = {
         firstName: 'Whill',
         secondName: 'Smith',
@@ -36,7 +118,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'First name',
         error: '',
-        type: TypeFormControl.text
+        type: TypeFormControl.text,
+        pattern: PregValidate.names,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
 
@@ -46,7 +134,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'Second name',
         error: '',
-        type: TypeFormControl.text
+        type: TypeFormControl.text,
+        pattern: PregValidate.names,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
 
@@ -56,7 +150,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'Nick',
         error: '',
-        type: TypeFormControl.text
+        type: TypeFormControl.text,
+        pattern: PregValidate.names,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
     const itemLogin: inputComponent = new inputComponent({
@@ -65,7 +165,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'Login',
         error: '',
-        type: TypeFormControl.text
+        type: TypeFormControl.text,
+        pattern: PregValidate.login,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
     const itemEmail: inputComponent = new inputComponent({
@@ -74,7 +180,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'Email',
         error: '',
-        type: TypeFormControl.email
+        type: TypeFormControl.email,
+        pattern: PregValidate.email,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
 
@@ -84,7 +196,13 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         status: StatusFormControl.success,
         label: 'Phone',
         error: '',
-        type: TypeFormControl.text
+        type: TypeFormControl.text,
+        pattern: PregValidate.phone,
+        events: {
+            blur: (e: Event) => {
+                validate(e)
+            }
+        }
     })
 
 
@@ -105,8 +223,12 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
         itemEmail,
         itemPhone,
         currentUser,
-
-        btnSave
+        btnSave,
+        events: {
+            submit: (e: SubmitEvent) => {
+                validate(e)
+            }
+        }
     })
     render(page, root)
 }
