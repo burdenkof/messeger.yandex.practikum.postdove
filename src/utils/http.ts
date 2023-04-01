@@ -4,15 +4,15 @@ enum METHODS {
     POST = 'POST',
     DELETE = 'DELETE'
 }
-type Options{
+type Options = {
     retries?: number,
     timeout?: number,
-    headers?: {[key: string]: unknown},
+    headers?: { [key: string]: unknown },
     method?: METHODS,
     data?: any
 }
 
-const queryStringify = (data:{[key: string]: unknown}) => {
+const queryStringify = (data: { [key: string]: unknown }) => {
     let str = ''
 
     const keys = Object.keys(data)
@@ -21,24 +21,24 @@ const queryStringify = (data:{[key: string]: unknown}) => {
 }
 
 export class HTTPTransport {
-    get = (url:string, options:Options = {}) => {
+    get = (url: string, options: Options = {}) => {
 
         return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
     };
-    put = (url:string, options:Options = {}) => {
+    put = (url: string, options: Options = {}) => {
 
         return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
     };
-    post = (url:string, options:Options = {}) => {
+    post = (url: string, options: Options = {}) => {
 
         return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
     };
-    delete = (url:string, options:Options = {}) => {
+    delete = (url: string, options: Options = {}) => {
 
         return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
     };
 
-    request = (url:string, options:Options = {}, timeout = 5000) => {
+    request = (url: string, options: Options = {}, timeout = 5000) => {
         const { method, data } = options;
 
         return new Promise((resolve, reject) => {
@@ -46,8 +46,8 @@ export class HTTPTransport {
             if (method === METHODS.GET && data) {
                 url += queryStringify(data)
             }
-             
-            xhr.open(method ? method:METHODS.GET, url);
+
+            xhr.open(method ? method : METHODS.GET, url);
             xhr.timeout = timeout
             xhr.onload = function () {
                 resolve(xhr);
@@ -68,11 +68,11 @@ export class HTTPTransport {
 }
 const myFetch = new HTTPTransport
 
-export function fetchWithRetry(url: string, options: Options):any {
+export function fetchWithRetry(url: string, options: Options): any {
     const { retries = 1 } = options
     console.log(retries)
-    
-    function onError(err:DOMException) {
+
+    function onError(err: DOMException) {
         const retriesLeft = retries - 1
         if (retriesLeft <= 0) {
             throw err
