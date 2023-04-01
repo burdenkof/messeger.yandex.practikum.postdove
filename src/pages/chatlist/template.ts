@@ -15,8 +15,8 @@ export const  chatListTemplate =
             {{/each}}
         </div>
         <div class = "chat-list_send-input">
-            <form name="form1" class="chat-list_send-input_form" id="form1" action="/#chatlist" method="post">
-                <input class = "chat-list_send-input_text" />
+            <form name="form1" class="chat-list_send-input_form"   action="/#chatlist" method="post">
+                <input class = "chat-list_send-input_text" id="input-message" name="message" />
                 <button type="submit" class = "chat-list_send-input_btn-send"><i class="fa-regular fa-circle-right"></i></button>
             </form>
         </div>

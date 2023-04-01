@@ -1,11 +1,12 @@
 import { chatListTemplate } from "./template"
 import chatRowComponent, { chatRow } from "../../components/chatrow/chatrow"
 import messageRowComponent, { messageRow } from "../../components/messagerow/messagerow"
-import { Nullable, render } from "../../utils/renderDOM"
+import { getFormData, Nullable, pregCheck, render } from "../../utils/renderDOM"
 import Block from "../../utils/base-block"
+import { PregErrors, PregValidate } from "../../utils/pregValidates"
 
 class pageChatList extends Block {
-    constructor(props: { chats?: chatRowComponent[], messages?: messageRowComponent[] }) {
+    constructor(props: { chats?: chatRowComponent[], messages?: messageRowComponent[], events?: unknown }) {
         super('div', props)
     }
     render() {
@@ -28,9 +29,36 @@ export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRo
         messages.push(new messageRowComponent(item))
     })
 
+    const validate = (e: Event) => {
+        if (e.target === null) return
 
+        let data: any
+        if (e.target instanceof HTMLFormElement) {
+            e.preventDefault()
+            data = getFormData(e.target)
+        } else {
+            const target = e.target as HTMLElement
+            const form: HTMLFormElement | null = target.closest('form')
+            if (form === null) return
+            data = getFormData(form)
+        }
+        if(data.message){
+            data.message = data.message.toString().trim()
+        }
+        let errors = 0
+        if (!pregCheck(PregValidate.noEmpty, data.message)) {
+            console.log(PregErrors.noEmpty)
+        } else {
+            console.log(data)
+        }
+    }
     const page = new pageChatList({
-        chats, messages
+        chats, messages,
+        events: {
+            submit: (e: SubmitEvent) => {
+                validate(e)
+            }
+        }
     })
     render(page, root)
 }
