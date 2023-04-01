@@ -1,5 +1,6 @@
-import EventBus from "./event-bus";
+/* eslint-disable import/extensions */
 import { v4 as makeUUID } from 'uuid';
+import EventBus from './event-bus';
 
 class Block {
 
@@ -87,7 +88,7 @@ class Block {
         const eventBus = new EventBus()
         this.tagName = tagName
 
-        const { childs, props } = this._getChilds(propsAndChilds);
+        const { childs } = this._getChilds(propsAndChilds);
 
         this.childs = childs;
         this._id = makeUUID();

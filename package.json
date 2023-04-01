@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "parcel ./static/index.html --open",
     "build": "parcel build ./static/index.html",
+    "eslint": "eslint",
     "start": "node ./src/server.ts"
   },
   "author": "",
@@ -12,12 +13,14 @@
   "devDependencies": {
     "@types/node": "^18.15.3",
     "@types/uuid": "^9.0.1",
-    "eslint": "^8.36.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
     "eslint-config-airbnb": "^19.0.4",
     "parcel": "^2.8.3",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "postcss": "^8.4.21",
-    "stylelint": "^15.3.0"
+    "stylelint": "^15.4.0"
   },
   "dependencies": {
     "@csstools/normalize.css": "12.0.0",

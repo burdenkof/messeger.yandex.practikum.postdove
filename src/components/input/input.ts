@@ -1,7 +1,19 @@
-import Block from '../../utils/base-block'
-import { inputTemplate } from './template'
-export enum StatusFormControl { success = 'success', error = 'error'}
-export enum TypeFormControl { text = 'text', password = 'password', email = 'email'}
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+import Block from '../../utils/base-block';
+import { inputTemplate } from './template';
+
+export enum StatusFormControl {
+    success = 'success',
+    error = 'error'
+}
+export enum TypeFormControl {
+    text = 'text',
+    password = 'password',
+    email = 'email'
+}
+
+
 export type inputState = {
     name?: string,
     placeholder?: string,
@@ -10,18 +22,18 @@ export type inputState = {
     error?: string,
     type?: TypeFormControl,
     pattern?: string,
-    events?:any,
+    events?: any,
     value?: string
 }
 class inputComponent extends Block {
     constructor(props: inputState) {
-        super("div", props);
+        super('div', props);
     }
 
     render() {
         return this.compile(inputTemplate, this.props);
     }
-    setProps (nextProps: inputState) {
+    setProps(nextProps: inputState) {
         if (!nextProps) {
             return
         }

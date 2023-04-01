@@ -1,4 +1,4 @@
-export const  errorTemplate =
+export const  errorTemplate:string =
 `
 <div class="logo-big" > 
     
