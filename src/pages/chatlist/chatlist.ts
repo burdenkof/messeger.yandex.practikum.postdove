@@ -47,6 +47,7 @@ export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRo
         }
         let errors = 0
         if (!pregCheck(PregValidate.noEmpty, data.message)) {
+            errors++
             console.log(PregErrors.noEmpty)
         } else {
             console.log(data)

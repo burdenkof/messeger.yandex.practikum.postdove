@@ -2,8 +2,10 @@
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './event-bus';
 
-class Block {
+type Props<P extends Record<string, unknown> = any> = { events?: Record<string, () => void> } & P;
 
+abstract class Block<P extends Record<string, any> = any>{
+    
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -14,9 +16,10 @@ class Block {
     _element: HTMLElement
     tagName: string
 
-    _props: any = {}
-    props: any = {}
-    childs: { [key: string]: Block | Block[] }
+    _props:Props<P>
+    props: Props<P>
+    childs: Record<string, Block> | Record<string, Block[]>;
+
     _id: string
     eventBus: () => EventBus;
     _getChilds(propsAndChilds: any): any {
@@ -34,10 +37,10 @@ class Block {
 
         return { childs, props };
     }
-    compile(template: string, props: any): DocumentFragment {
+    compile(template: string, props: Props<P>): DocumentFragment {
         const Handlebars = require("handlebars")
         const Templator = Handlebars.compile(template)
-        const propsAndStubs = { ...props }
+        const propsAndStubs:Props = { ...props }
 
 
         for (const key in this.props) {
@@ -83,7 +86,7 @@ class Block {
        *
        * @returns {void}
        */
-    constructor(tagName: string = "div", propsAndChilds: object = {}) {
+    constructor(tagName: string = "div", propsAndChilds: Props) {
 
         const eventBus = new EventBus()
         this.tagName = tagName
@@ -140,7 +143,7 @@ class Block {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidUpdate(oldProps: any, newProps: any) {
+    _componentDidUpdate(oldProps: Props, newProps: Props) {
         const response = this.componentDidUpdate(oldProps, newProps)
         if (response === true) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
@@ -148,11 +151,11 @@ class Block {
     }
 
 
-    componentDidUpdate(oldProps: any, newProps: any) {
+    componentDidUpdate(oldProps: Props, newProps: Props) {
         return true
     }
 
-    setProps(nextProps: any) {
+    setProps(nextProps: Props) {
         if (!nextProps) {
             return
         }
@@ -176,9 +179,16 @@ class Block {
     private _removeEvents() {
         const { events = {} } = this.props;
 
-        Object.keys(events).forEach(eventName => {
-            this._element.removeEventListener(eventName, events[eventName])
-        });
+        Object.keys(events).forEach((eventName: string) => {
+            if (eventName === 'focus' || eventName === 'blur' || eventName === 'input' || eventName === 'keyup') {
+                const temp = this._element.querySelector(`input`)
+                if (temp !== null) {
+                    temp.removeEventListener(eventName, events[eventName]);
+                    return
+                }
+            }
+            this._element.removeEventListener(eventName, events[eventName]);
+        })
     }
     private _addEvents() {
         const { events = {} } = this.props;
