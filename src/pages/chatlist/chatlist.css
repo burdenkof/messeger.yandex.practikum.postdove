@@ -1,3 +1,5 @@
+/* stylelint-disable length-zero-no-unit */
+/* stylelint-disable selector-class-pattern */
 
 .chat-list{
     display:flex;
@@ -9,22 +11,24 @@
         overflow-y:scroll;
         flex-basis: max-content;
     }
+
     .chat-list_messages-wrapper {
-        
         flex-grow:25;
         max-height: calc(100vh);
         display: flex;
         flex-direction: column;
-
         flex-basis: min-content;
     }
+
     ul{
-        padding: 0px;
+        padding: none;
         margin: none;
+
         li{
             display: block;
         }
     }
+
     .chat-list_message-list{
         flex-basis: min-content;
         overflow-y:scroll;
@@ -32,18 +36,21 @@
         padding-right:15px;
         max-height: calc(100vh);
     }
+
     .chat-list_send-input{
         display: flex;
         border-radius: 15px;
-        background: #EBF0F1;
+        background: #ebf0f1;
         margin:10px;
         margin-bottom: 15px;
-        margin-top: 0px;
-        box-shadow: -6.05287px -2.05287px 9.94713px #dadada;
+        margin-top: none;
+        box-shadow: -6.0528px -2.0528px 9.9471px #dadada;
+
         .chat-list_send-input_form{
             width: 100%;
             display: flex;
         }
+        
         .chat-list_send-input_text{
             font-size: 15px;
             width: 100%;
@@ -53,27 +60,28 @@
             padding: 10px;
             border: solid 1px #dadada;
         }
+
         .chat-list_send-input_text:focus, .chat-list_send-input_text:focus-visible {
             outline-width: 0;
             border: solid 1px gray!important;
         }
+
         .chat-list_send-input_btn-send {
             position:absolute;
             right: 11px;
-            position: absolute;
             width: 80px;
             height: 41px;
             border: none;
-            background: #6F94CC;
+            background: #6f94cc;
             border-radius: 0px 46.7149px 46.7149px 0px;
             color: white;
             text-align: center;
             padding: 0px;
             font-size: 25px;
         }
+
         .chat-list_send-input_btn-send:hover{
-            box-shadow: 1.94713px 1.94713px 1.94713px #3b0aff61;
+            box-shadow: 1.9471px 1.9471px 1.9471px #3b0aff61;
         }
     }
 }
-

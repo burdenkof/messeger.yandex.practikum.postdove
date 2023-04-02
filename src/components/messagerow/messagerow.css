@@ -1,28 +1,25 @@
+/* stylelint-disable length-zero-no-unit */
+/* stylelint-disable color-function-notation */
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+/* stylelint-disable selector-class-pattern */
 .message-list_one-row {
     display:flex;
     padding-bottom: 45px;
     
     .message-list_one-row_baloon {
         font-family: Inter;
- 
         font-weight: 400;
-        background: #A9ACF0;
-        self-align:end;
+        background: #a9acf0;
         padding-top: 15px;
         padding-right:40px;
         padding-left:40px;
         border-radius: 200px;
         max-width: 50%;
         color: white;
-        font-family: 'Inter';
         font-style: normal;
-        font-weight: 400;
         font-size: 19px;
         line-height: 25px;
-
-        color: #FFFFFF;
-
-        text-shadow: 0px 0.822896px 0.822896px rgba(0, 0, 0, 0.25);
+        text-shadow: 0px 0.8229px 0.8229px rgba(0, 0, 0, 25%);
         display: flex;
         flex-direction: column;
 
@@ -35,6 +32,7 @@
     }
 
 }
+
 .message-list_one-row.output {
     justify-content: flex-end;
 }
