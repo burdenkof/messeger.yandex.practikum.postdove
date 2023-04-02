@@ -42,7 +42,7 @@ export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRo
             if (form === null) return
             data = getFormData(form)
         }
-        if(data.message){
+        if (data.message) {
             data.message = data.message.toString().trim()
         }
         let errors = 0
