@@ -16,7 +16,7 @@ class pageChangePassword extends Block {
 }
 
 
-export function renderChangePassword(root: Nullable<HTMLDivElement>) {
+export function renderChangePassword():Block {
 
     const validate = (e: Event) => {
         if (e.target === null) return
@@ -144,5 +144,5 @@ export function renderChangePassword(root: Nullable<HTMLDivElement>) {
             }
         }
     })
-    render(page, root)
+    return page
 }

@@ -1,4 +1,3 @@
-import { Nullable, render } from "../../utils/renderDOM";
 import Block from "../../utils/base-block";
 import { errorTemplate } from "./template";
 type errorPageInfo = {
@@ -16,13 +15,13 @@ class pageError extends Block {
     }
 }
 
-export function renderErrorPage(root: Nullable<HTMLDivElement>, code = 404, title = 'Page not found', message = 'We are sorry, but there is no such page') {
+export function renderErrorPage(code = 404, title = 'Page not found', message = 'We are sorry, but there is no such page'): Block {
 
     const page: pageError = new pageError({
         code: code,
         message: message,
         title: title
     })
-    render(page, root)
+    return page
 
 }

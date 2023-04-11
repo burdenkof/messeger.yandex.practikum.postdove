@@ -3,7 +3,6 @@ import { loginTemplate } from "./template";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input";
 import Block from "../../utils/base-block";
 import buttonComponent from "../../components/button/button";
-import { Nullable, render } from "../../utils/renderDOM";
 
 class pageLogin extends Block {
     constructor(props: any) {
@@ -16,7 +15,7 @@ class pageLogin extends Block {
     }
 }
 
-export function renderLogin(root: Nullable<HTMLDivElement>) {
+export function renderLogin():Block {
 
     const itemLogin: inputComponent = new inputComponent({
         name: 'login',
@@ -51,6 +50,6 @@ export function renderLogin(root: Nullable<HTMLDivElement>) {
     const page = new pageLogin({
         itemLogin, itemPassword, btnSignIn, btnSignUp
     })
-    render(page, root)
+    return Block
 
 }

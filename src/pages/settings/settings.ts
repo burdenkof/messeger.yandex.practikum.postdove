@@ -1,5 +1,4 @@
 import { settingsTemplate } from "./template";
-import { Nullable, render } from "../../utils/renderDOM";
 import buttonComponent from "../../components/button/button";
 import Block from "../../utils/base-block";
 
@@ -21,7 +20,7 @@ class pageSettings extends Block {
     }
 }
 
-export function renderSettings(root: Nullable<HTMLDivElement>) {
+export function renderSettings():Block {
 
 
     const currentUser: profileInfo = {
@@ -54,5 +53,5 @@ export function renderSettings(root: Nullable<HTMLDivElement>) {
         btnChangePassword,
         btnEdit
     })
-    render(page, root)
+    return page
 }

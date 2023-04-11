@@ -1,6 +1,6 @@
 import buttonComponent from "../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input";
-import { getFormData, Nullable, pregCheck, render } from "../../utils/renderDOM";
+import { getFormData, pregCheck } from "../../utils/renderDOM";
 import Block from "../../utils/base-block";
 import { signupTemplate } from "./template";
 import { PregErrors, PregValidate } from "../../utils/pregValidates";
@@ -14,7 +14,7 @@ class pageSignup extends Block {
         return this.compile(signupTemplate, this.props)
     }
 }
-export function renderSignup(root: Nullable<HTMLDivElement>) {
+export function renderSignup():Block {
     
     const validate = (e: Event) => {
         if (e.target === null) return
@@ -276,6 +276,6 @@ export function renderSignup(root: Nullable<HTMLDivElement>) {
             }
         }
     })
-    render(page, root)
+    return page
 
 }

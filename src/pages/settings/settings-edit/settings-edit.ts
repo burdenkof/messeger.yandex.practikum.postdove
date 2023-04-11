@@ -1,5 +1,5 @@
 import { settingsEditTemplate } from "./template";
-import { getFormData, Nullable, pregCheck, render } from "../../../utils/renderDOM";
+import { getFormData, pregCheck } from "../../../utils/renderDOM";
 import Block from "../../../utils/base-block";
 import { profileInfo } from "../settings";
 import buttonComponent from "../../../components/button/button";
@@ -16,7 +16,7 @@ class pageSettingsEdit extends Block {
 }
 
 
-export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
+export function renderSettingsEdit():Block {
 
 
     const validate = (e: Event) => {
@@ -230,5 +230,5 @@ export function renderSettingsEdit(root: Nullable<HTMLDivElement>) {
             }
         }
     })
-    render(page, root)
+    return page
 }

@@ -1,7 +1,7 @@
 import { chatListTemplate } from "./template"
 import chatRowComponent, { chatRow } from "../../components/chatrow/chatrow"
 import messageRowComponent, { messageRow } from "../../components/messagerow/messagerow"
-import { getFormData, Nullable, pregCheck, render } from "../../utils/renderDOM"
+import { getFormData, pregCheck } from "../../utils/renderDOM"
 import Block from "../../utils/base-block"
 import { PregErrors, PregValidate } from "../../utils/pregValidates"
 
@@ -15,7 +15,7 @@ class pageChatList extends Block {
 
 }
 
-export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRow[], messageItems: messageRow[]) => {
+export const renderChatList = (chatItems: chatRow[], messageItems: messageRow[]):Block => {
 
 
     const chats: chatRowComponent[] = []
@@ -61,5 +61,5 @@ export const renderChatList = (root: Nullable<HTMLDivElement>, chatItems: chatRo
             }
         }
     })
-    render(page, root)
+    return page
 }

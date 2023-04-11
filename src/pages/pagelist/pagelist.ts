@@ -1,4 +1,3 @@
-import { Nullable, render } from "../../utils/renderDOM";
 import Block from "../../utils/base-block";
 import { pagelistTemplate } from "./template";
 
@@ -10,11 +9,11 @@ class pageList extends Block {
     return this.compile(pagelistTemplate, this.props)
   }
 }
-export function renderPagelist(root: Nullable<HTMLDivElement>) {
+export function renderPagelist():Block {
  
 
   const page: pageList = new pageList()
-  render(page, root)
+  return page
 
 }
 
