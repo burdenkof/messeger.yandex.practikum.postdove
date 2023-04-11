@@ -1,10 +1,10 @@
-import Block from "./utils/base-block"
-import { Nullable, render } from "./utils/renderDOM"
+import Block from "./base-block"
+import { Nullable, render } from "./renderDOM"
 
 export enum paths {
     main = '/',
     login = '/login',
-    signup = '/sign-up',
+    signup = '/signup',
     settings = '/settings',
     settingsEdit = '/settings-edit',
     changePassword = '/change-password',
@@ -20,7 +20,7 @@ class Route {
 
     constructor(
         private pathname: string,
-        private BlockCreater: () => Block)  {
+        private BlockCreater: () => Block) {
     }
 
     leave() {
@@ -38,7 +38,7 @@ class Route {
             this.block = this.BlockCreater()
 
             render(this.block, root)
-        } else{
+        } else {
             this.block?.show()
         }
     }
@@ -60,7 +60,7 @@ class Router {
         Router.__instance = this
     }
 
-    public use(pathname: string, BlockCreater: () => Block ) {
+    public use(pathname: string, BlockCreater: () => Block) {
         const route = new Route(pathname, BlockCreater)
         this.routes.push(route)
 

@@ -6,7 +6,7 @@ export const  loginTemplate: string =
 </div>
 
 <div class="pages-login">
-    <form name="form1" id="form1" action="/#chatlist" method="post">
+    <form name="form1" id="form1" action="/chatlist" method="post">
         <h1 class="form-main-title">Login</h1>
                 {{{itemLogin}}}
                 {{{itemPassword}}}

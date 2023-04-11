@@ -8,7 +8,7 @@ import { renderChangePassword } from "./pages/settings/change-password/change-pa
 import { renderSettings } from "./pages/settings/settings";
 import { renderSettingsEdit } from "./pages/settings/settings-edit/settings-edit";
 import { renderSignup } from "./pages/signup/signup";
-import { router, paths } from "./routes";
+import { router, paths } from "./utils/routes";
 
 window.addEventListener('DOMContentLoaded', () => {
   let list: chatRow[] = []; let messages: messageRow[] = [];
@@ -44,4 +44,9 @@ window.addEventListener('DOMContentLoaded', () => {
     .use(paths.chatlist, () => renderChatList(list, messages))
     .use(paths.error404, () => renderErrorPage())
     .use(paths.error500, () => renderErrorPage(500, 'Something broke', 'We are already fixing'))
+
+    router.start();
+    
+        //router.go(paths.main);
+ 
 })

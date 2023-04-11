@@ -45,11 +45,18 @@ export function renderLogin():Block {
         name: 'Sign Up',
         id: 'btn-sign-up',
         type: 'button',
-        onclick: `window.location.href='/#signup'`
+        onclick: `window.location.href='/signup'`
     })
     const page = new pageLogin({
-        itemLogin, itemPassword, btnSignIn, btnSignUp
+        itemLogin, itemPassword, btnSignIn, btnSignUp, events: {
+            submit: (e: SubmitEvent) => {
+                e.preventDefault()
+                let form: HTMLFormElement = e.target as HTMLFormElement
+
+                window.location.href = form.action
+            }
+        }
     })
-    return Block
+    return page
 
 }

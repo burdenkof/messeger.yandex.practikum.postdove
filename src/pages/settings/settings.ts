@@ -38,13 +38,13 @@ export function renderSettings():Block {
         name: 'Edit',
         id: 'btn-edit-settings',
         type: 'submit',
-        onclick: `window.location.href='/#settings-edit'`
+        onclick: `window.location.href='/settings-edit'`
     })
     const btnChangePassword: buttonComponent = new buttonComponent({
         name: 'Change pass',
         id: 'btn-change-password',
         type: 'button',
-        onclick: `window.location.href='/#change-password'`
+        onclick: `window.location.href='/change-password'`
     })
 
     const page: pageSettings = new pageSettings({
