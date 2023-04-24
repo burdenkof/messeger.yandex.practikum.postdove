@@ -103,13 +103,15 @@ export function renderSettingsEdit():Block {
 
     }
     const currentUser: profileInfo = {
+        id: 42,
         first_name: 'Whill',
         second_name: 'Smith',
         phone: '+7 (927) 999-99-99',
         email: 'budenkof@yandex.ru',
         display_name: 'Charmng',
         login: 'burdenkof',
-        password: 'dtdtmyytt45m'
+        password: 'dtdtmyytt45m',
+        avatar: ''
     }
 
     // Имена полей для изменения информации о пользователе: first_name, second_name, display_name, login, email, phone;

@@ -1,13 +1,7 @@
+import { chatRow } from '../../types';
 import Block from '../../utils/base-block'
 import { chatRowTemplate } from './template'
-export type chatRow = {
-    html?: String,
-    time?: String,
-    name?: String,
-    userName?: String,
-    lastText?: String,
-    avatar?: String
-}
+
 
 class chatRowComponent extends Block {
     constructor(props: chatRow) {

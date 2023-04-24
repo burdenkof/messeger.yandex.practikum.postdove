@@ -18,13 +18,15 @@ export function renderSettings():Block {
 
 
     const currentUser: profileInfo = {
+        id:42,
         first_name: 'Whill',
         second_name: 'Smith',
         phone: '+7 (927) 999-99-99',
         email: 'budenkof@yandex.ru',
         display_name: 'Charmng',
         login: 'burdenkof',
-        password: 'dtdtmyytt45m'
+        password: 'dtdtmyytt45m',
+        avatar: ''
     }
 
 
