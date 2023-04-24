@@ -20,30 +20,48 @@ const queryStringify = (data: { [key: string]: unknown }) => {
     return '?' + str.substr(1)
 }
 
-export class HTTPTransport{
+export class HTTPTransport {
     private base_url = "https://ya-praktikum.tech/api/v2";
     handle: string = ''
-    constructor(handle_: string =''){
-        this.handle = this.base_url+handle_
+    constructor(handle_: string = '') {
+        this.handle = this.base_url + handle_
     }
-    get = (url: string, options: Options = {}):Promise<Response> => {
+    public get<Response>(url: string = '/', options: Options = {}): Promise<Response> {
+        return this.request<Response>(this.handle + url, { ...options, method: METHODS.GET }, options.timeout);
+    }
 
-        return this.request(this.handle+url, { ...options, method: METHODS.GET }, options.timeout);
+    public put<Response>(url: string, options: Options = {}): Promise<Response> {
+
+        return this.request<Response>(this.handle + url, { ...options, method: METHODS.PUT }, options.timeout);
+    }
+
+    public post<Response>(url: string, options: Options = {}): Promise<Response> {
+
+        return this.request<Response>(this.handle + url, { ...options, method: METHODS.POST }, options.timeout);
+    }
+
+    public delete<Response>(url: string, options: Options = {}): Promise<Response> {
+
+        return this.request<Response>(this.handle + url, { ...options, method: METHODS.DELETE }, options.timeout);
     };
-    put = (url: string, options: Options = {}):Promise<Response> => {
 
-        return this.request(this.handle+url, { ...options, method: METHODS.PUT }, options.timeout);
-    };
-    post = (url: string, options: Options = {}):Promise<Response> => {
 
-        return this.request(this.handle+url, { ...options, method: METHODS.POST }, options.timeout);
-    };
-    delete = (url: string, options: Options = {}):Promise<Response> => {
+    fetchWithRetry(url: string, options: Options): Promise<Response> {
+        const { retries = 1 } = options
+        console.log(retries)
 
-        return this.request(this.handle+url, { ...options, method: METHODS.DELETE }, options.timeout);
-    };
+        function onError(err: DOMException) {
+            const retriesLeft = retries - 1
+            if (retriesLeft <= 0) {
+                throw err
+            }
+            return this.fetchWithRetry(url, { ...options, retries: retriesLeft })
+        }
 
-    request = (url: string, options: Options = {}, timeout = 5000):Promise<Response> => {
+        return this.request<Response>(url, options).catch(onError)
+    }
+
+    private request<Response>(url: string, options: Options = {}, timeout = 5000): Promise<Response> {
         const { method, data } = options;
 
         return new Promise((resolve, reject) => {
@@ -73,20 +91,3 @@ export class HTTPTransport{
 
     };
 }
-const myFetch = new HTTPTransport
-
-export function fetchWithRetry(url: string, options: Options): any {
-    const { retries = 1 } = options
-    console.log(retries)
-
-    function onError(err: DOMException) {
-        const retriesLeft = retries - 1
-        if (retriesLeft <= 0) {
-            throw err
-        }
-        return fetchWithRetry(url, { ...options, retries: retriesLeft })
-    }
-
-    return myFetch.request(url, options).catch(onError)
-}
-

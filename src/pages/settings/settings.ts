@@ -1,16 +1,10 @@
 import { settingsTemplate } from "./template";
 import buttonComponent from "../../components/button/button";
 import Block from "../../utils/base-block";
+import { profileInfo } from "../../types";
 
-export type profileInfo = {
-    firstName: String,
-    secondName: String,
-    phone: String,
-    email: String,
-    displayName: String,
-    login: String,
-    password: String
-}
+
+ 
 class pageSettings extends Block {
     constructor(props: any) {
         super('div', props)
@@ -24,11 +18,11 @@ export function renderSettings():Block {
 
 
     const currentUser: profileInfo = {
-        firstName: 'Whill',
-        secondName: 'Smith',
+        first_name: 'Whill',
+        second_name: 'Smith',
         phone: '+7 (927) 999-99-99',
         email: 'budenkof@yandex.ru',
-        displayName: 'Charmng',
+        display_name: 'Charmng',
         login: 'burdenkof',
         password: 'dtdtmyytt45m'
     }
