@@ -1,10 +1,11 @@
 import { settingsEditTemplate } from "./template";
 import { getFormData, pregCheck } from "../../../utils/renderDOM";
 import Block from "../../../utils/base-block";
-import { profileInfo } from "../settings";
+ 
 import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
 import { PregErrors, PregValidate } from "../../../utils/pregValidates";
+import { profileInfo } from "../../../types";
 
 class pageSettingsEdit extends Block {
     constructor(props: any) {
@@ -102,11 +103,11 @@ export function renderSettingsEdit():Block {
 
     }
     const currentUser: profileInfo = {
-        firstName: 'Whill',
-        secondName: 'Smith',
+        first_name: 'Whill',
+        second_name: 'Smith',
         phone: '+7 (927) 999-99-99',
         email: 'budenkof@yandex.ru',
-        displayName: 'Charmng',
+        display_name: 'Charmng',
         login: 'burdenkof',
         password: 'dtdtmyytt45m'
     }
