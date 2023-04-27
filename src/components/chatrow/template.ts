@@ -4,13 +4,13 @@ export const  chatRowTemplate: string =
         
     </div>
     <div class="chat-list_one-row_main-info"  >
-    <div class="chat-list_one-row_main-info_time">{{time}}</div>
+    <div class="chat-list_one-row_main-info_time">{{last_message.time}}</div>
 
-        <div class="chat-list_one-row_main-info_chat-name">{{name}}</div>
+        <div class="chat-list_one-row_main-info_chat-name">{{title}}</div>
 
         <div class="chat-list_one-row_main-info_description">
-            <span class="chat-list_one-row_main-info_description_username">{{userName}}:&nbsp;</span>
-            <div class="chat-list_one-row_main-info_description_text">{{lastText}}</div>
+            <span class="chat-list_one-row_main-info_description_username">{{last_message.user.first_name}} {{last_message.user.last_name}}:&nbsp;</span>
+            <div class="chat-list_one-row_main-info_description_text">{{last_message.content}}</div>
             
         </div>
         

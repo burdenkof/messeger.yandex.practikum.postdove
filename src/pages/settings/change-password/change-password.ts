@@ -1,10 +1,10 @@
 import { changePasswordTemplate } from "./template";
-import { getFormData, Nullable, pregCheck, render } from "../../../utils/renderDOM";
+import { getFormData,  pregCheck } from "../../../utils/renderDOM";
 import Block from "../../../utils/base-block";
-import { profileInfo } from "../settings";
 import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
 import { PregErrors, PregValidate } from "../../../utils/pregValidates";
+import { profileInfo } from "../../../types";
 
 class pageChangePassword extends Block {
     constructor(props: any) {
@@ -73,11 +73,13 @@ export function renderChangePassword():Block {
     }
 
     const currentUser: profileInfo = {
-        firstName: 'Whill',
-        secondName: 'Smith',
+        id:0,
+        avatar:'',
+        first_name: 'Whill',
+        second_name: 'Smith',
         phone: '+7 (927) 999-99-99',
         email: 'budenkof@yandex.ru',
-        displayName: 'Charmng',
+        display_name: 'Charmng',
         login: 'burdenkof',
         password: 'dtdtmyytt45m'
     }

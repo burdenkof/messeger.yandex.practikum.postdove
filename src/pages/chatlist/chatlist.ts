@@ -1,9 +1,10 @@
 import { chatListTemplate } from "./template"
-import chatRowComponent, { chatRow } from "../../components/chatrow/chatrow"
 import messageRowComponent, { messageRow } from "../../components/messagerow/messagerow"
 import { getFormData, pregCheck } from "../../utils/renderDOM"
 import Block from "../../utils/base-block"
 import { PregErrors, PregValidate } from "../../utils/pregValidates"
+import chatRowComponent from "../../components/chatrow/chatrow"
+import { chatRow } from "../../types"
 
 class pageChatList extends Block {
     constructor(props: { chats?: chatRowComponent[], messages?: messageRowComponent[], events?: unknown }) {
@@ -15,19 +16,13 @@ class pageChatList extends Block {
 
 }
 
-export const renderChatList = (chatItems: chatRow[], messageItems: messageRow[]):Block => {
+export const renderChatList = ():Block => {
 
 
     const chats: chatRowComponent[] = []
     const messages: messageRowComponent[] = []
 
-    chatItems.map((item: chatRow) => {
-        chats.push(new chatRowComponent(item))
-    })
-
-    messageItems.map((item: messageRow) => {
-        messages.push(new messageRowComponent(item))
-    })
+ 
 
     const validate = (e: Event) => {
         if (e.target === null) return
