@@ -72,10 +72,19 @@ export class HTTPTransport {
 
             xhr.open(method ? method : METHODS.GET, url);
             xhr.timeout = timeout
-            xhr.onload = function () {
-                resolve(xhr.response);
+ 
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status < 400) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
             };
-
+            xhr.onabort = reject;
+            xhr.onerror = reject;
+            xhr.ontimeout = reject;
             xhr.onabort = reject;
             xhr.onerror = reject;
             xhr.ontimeout = reject;

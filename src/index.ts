@@ -2,7 +2,7 @@ import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { controllerAuth } from "./controllers/auth";
 import { renderChatList } from "./pages/chatlist/chatlist";
 import { renderErrorPage } from "./pages/errorpage/errorpage";
-import { renderLogin } from "./pages/login/login";
+import { doLogout, renderLogin } from "./pages/login/login";
 import renderPagelist from "./pages/pagelist/pagelist";
 import { renderChangePassword } from "./pages/settings/change-password/change-password";
 import { renderSettings } from "./pages/settings/settings";
@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   router
     .use(paths.main, () => renderPagelist())
     .use(paths.login, () => renderLogin())
+    .use(paths.logout,  () =>  doLogout())
     .use(paths.signup, () => renderSignup())
     .use(paths.settings, () => renderSettings())
     .use(paths.settingsEdit, () => renderSettingsEdit())

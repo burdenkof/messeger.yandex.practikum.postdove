@@ -41,6 +41,16 @@ class ControllerAuth {
         }
     }
 
+    public async logout(){
+
+        try{
+            await this.model.logout()
+            store.clear()
+            router.go(paths.main)
+        }catch(E: any){
+            console.log(E.message)
+        }
+    }
 
 }
 export const controllerAuth: ControllerAuth = new ControllerAuth()

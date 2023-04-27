@@ -17,6 +17,14 @@ class pageLogin extends Block {
     }
 }
 
+class logout extends Block {
+
+}
+export function doLogout():Block {
+    controllerAuth.logout()
+    return new logout('div', null)
+}
+
 export function renderLogin():Block {
 
     const itemLogin: inputComponent = new inputComponent({
