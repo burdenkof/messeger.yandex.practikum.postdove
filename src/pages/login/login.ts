@@ -3,6 +3,8 @@ import { loginTemplate } from "./template";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input";
 import Block from "../../utils/base-block";
 import buttonComponent from "../../components/button/button";
+import { getFormData } from "../../utils/renderDOM";
+import { controllerAuth } from "../../controllers/auth";
 
 class pageLogin extends Block {
     constructor(props: any) {
@@ -51,9 +53,11 @@ export function renderLogin():Block {
         itemLogin, itemPassword, btnSignIn, btnSignUp, events: {
             submit: (e: SubmitEvent) => {
                 e.preventDefault()
-                let form: HTMLFormElement = e.target as HTMLFormElement
-
-                window.location.href = form.action
+                let data: any
+                if (e.target instanceof HTMLFormElement) {
+                     data = getFormData(e.target)
+                     controllerAuth.singin(data)
+                }
             }
         }
     })

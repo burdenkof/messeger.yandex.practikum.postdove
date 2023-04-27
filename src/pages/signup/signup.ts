@@ -4,6 +4,7 @@ import { getFormData, pregCheck } from "../../utils/renderDOM";
 import Block from "../../utils/base-block";
 import { signupTemplate } from "./template";
 import { PregErrors, PregValidate } from "../../utils/pregValidates";
+import { controllerAuth } from "../../controllers/auth";
 
 
 class pageSignup extends Block {
@@ -16,7 +17,7 @@ class pageSignup extends Block {
 }
 export function renderSignup():Block {
     
-    const validate = (e: Event) => {
+    const validate = async (e: Event) => {
         if (e.target === null) return
        
         let data: any
@@ -127,6 +128,9 @@ export function renderSignup():Block {
 
         if (e.target instanceof HTMLFormElement && errors == 0) {
             console.log(data)
+
+            await controllerAuth.singup(data)
+
         }
 
     }

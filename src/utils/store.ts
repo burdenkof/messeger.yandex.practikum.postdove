@@ -1,5 +1,5 @@
 import EventBus from "./event-bus";
-
+import {set} from "./functions"
 export enum StoreEvents {
     Updated = 'updated'
 }
@@ -22,4 +22,4 @@ export class Store extends EventBus {
     }
 }
 
-export const store = new Store();
+export const store: Store = new Store();

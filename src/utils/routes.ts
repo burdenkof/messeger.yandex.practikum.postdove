@@ -4,6 +4,7 @@ import { Nullable, render } from "./renderDOM"
 export enum paths {
     main = '/',
     login = '/login',
+    logout = '/logout',
     signup = '/signup',
     settings = '/settings',
     settingsEdit = '/settings-edit',

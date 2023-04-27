@@ -1,4 +1,6 @@
-type Indexed<T = unknown> = {
+import exp = require("constants");
+
+export type Indexed<T = unknown> = {
     [key in string]: T;
   };
   function isEqual(x: Indexed, y: Indexed): boolean {
@@ -13,11 +15,11 @@ type Indexed<T = unknown> = {
      return  x === y
     }
   }
-  type StringIndexed = Record<string, any>;
+  export type StringIndexed = Record<string, any>;
 
  
   
-  function queryStringify(data: StringIndexed): string | never {
+  export function queryStringify(data: StringIndexed): string | never {
     
     function getParamsWithPath(prefix:string, obj: any): string[] {
       let parts_: string[] = []
@@ -60,7 +62,7 @@ type Indexed<T = unknown> = {
     return parts.join('&')
   }
   
-  function merge(lhs: Indexed, rhs: Indexed): Indexed {
+ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
     for (var p in rhs) {
       try {
    
@@ -84,7 +86,7 @@ type Indexed<T = unknown> = {
   
   
   
-  function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
+  export function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
       if(typeof path != "string"){
         throw new Error("path must be string")
       }

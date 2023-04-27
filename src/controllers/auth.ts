@@ -5,7 +5,7 @@ import { paths, router } from "../utils/routes";
 
 
 
-export class ControllerAuth {
+class ControllerAuth {
     private model: ApiAuth = new ApiAuth();
 
     public async getProfile(){

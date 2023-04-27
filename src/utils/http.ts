@@ -79,7 +79,9 @@ export class HTTPTransport {
             xhr.onabort = reject;
             xhr.onerror = reject;
             xhr.ontimeout = reject;
-
+            if (!(data instanceof FormData)) {
+                xhr.setRequestHeader('Content-Type', 'application/json');
+            }
             xhr.withCredentials = true;
             xhr.responseType = 'json';
             if (method === METHODS.GET || !data) {
