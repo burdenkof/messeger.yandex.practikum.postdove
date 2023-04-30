@@ -4,20 +4,20 @@
 .chat-list{
     display:flex;
     position:relative;
-    max-height:calc(100vh - 15px);
-     
+    height:calc(100vh - 15px);
+    width: 100vw;
+
     aside{
         flex-grow:1;
         overflow-y:scroll;
-        flex-basis: max-content;
+        min-width: 513px;
     }
 
     .chat-list_messages-wrapper {
         flex-grow:25;
-        max-height: calc(100vh);
+        height: calc(100vh);
         display: flex;
         flex-direction: column;
-        flex-basis: min-content;
     }
 
     ul{
@@ -30,11 +30,10 @@
     }
 
     .chat-list_message-list{
-        flex-basis: min-content;
         overflow-y:scroll;
         padding-left:15px;
         padding-right:15px;
-        max-height: calc(100vh);
+        height: calc(100vh);
     }
 
     .chat-list_send-input{

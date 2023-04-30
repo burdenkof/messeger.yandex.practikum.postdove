@@ -1,5 +1,6 @@
 import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { controllerAuth } from "./controllers/auth";
+import { controllerChatlist } from "./controllers/chatlist";
 import { renderChatList } from "./pages/chatlist/chatlist";
 import { renderErrorPage } from "./pages/errorpage/errorpage";
 import { doLogout, renderLogin } from "./pages/login/login";
@@ -54,7 +55,10 @@ window.addEventListener('DOMContentLoaded', async () => {
    
     try{
 
+      
       await controllerAuth.getProfile()
+      await controllerChatlist.getChats()
+
       router.start()  
       if(isPublicRoute ){
         router.go(paths.chatlist)
