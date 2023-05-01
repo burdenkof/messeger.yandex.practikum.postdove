@@ -220,8 +220,9 @@ abstract class Block<P extends Record<string, any> = any>{
                 return typeof value === "function" ? value.bind(target) : value;
             },
             set(target, prop, value) {
-                target[prop] = value;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target)
+                const oldProps = { ...target }
+                target[prop] = value
+                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target)
                 return true;
             },
             deleteProperty(target, prop) {

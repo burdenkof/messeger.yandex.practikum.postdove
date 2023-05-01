@@ -5,7 +5,8 @@ export type buttonState = {
     name?: string,
     id?: string,
     type?: string,
-    onclick?: string
+    onclick?: string,
+    events?: unknown
 }
 
 class buttonComponent extends Block {

@@ -54,12 +54,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
    
     try{
-
+      router.start()  
       
       await controllerAuth.getProfile()
       await controllerChatlist.getChats()
 
-      router.start()  
+      
       if(isPublicRoute ){
         router.go(paths.chatlist)
       }

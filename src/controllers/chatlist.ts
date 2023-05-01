@@ -19,6 +19,12 @@ class ControllerChatlist {
     async getChatInfo(chatId: number): Promise<chatRow[]> {
         return this.model.getChatInfo(chatId)
     }
+    
+    async deleteChat(chatId: number) {
+        await this.model.delete(chatId)
+        this.getChats()
+    }
+
 
 }
 export const controllerChatlist = new ControllerChatlist()

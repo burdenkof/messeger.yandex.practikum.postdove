@@ -4,7 +4,12 @@ export const  chatRowTemplate: string =
         
     </div>
     <div class="chat-list_one-row_main-info"  >
-    <div class="chat-list_one-row_main-info_time">{{last_message.time}}</div>
+        
+        <div class="chat-list_one-row_main-info_time">
+            <div class="chat-list_one-row_main-info_delete">{{{btnDeleteChat}}}</div>
+            {{last_message.time}}
+            
+        </div>
 
         <div class="chat-list_one-row_main-info_chat-name">{{title}}</div>
 

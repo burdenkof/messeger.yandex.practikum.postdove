@@ -1,9 +1,11 @@
 export const  chatListTemplate =
 `
 <div class ="chat-list">
+
     <aside id="aside-chat-list">
+        <div class="chat-list_toolbar">{{{btnAddChat}}}</div>
         <ul class="chat-list-ul">
-            {{#each chats}}
+            {{#each chatList}}
                 <li>{{{this}}}</li>
             {{/each}}
         </ul>

@@ -1,3 +1,4 @@
+/* stylelint-disable length-zero-no-unit */
 /* stylelint-disable selector-class-pattern */
 .chat-list_one-row {
     display: flex;
@@ -54,7 +55,31 @@
             align-self: flex-end;
             color: gray;
             font-size: 11px;
+
+            div{
+                line-height: 9px;
+            }
+            
+                .chat-list_one-row_main-info_delete{
+                    padding: 0px!important;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-start;
+    
+                    .form-button{
+                        margin: 0px!important;
+                        align-self: flex-end;
+                        font-size: 11px;
+                        padding: 5px!important;
+                        line-height: 9px;
+                     
+                    }
+    
+                }
+            
         }
+
+
 
     }
 

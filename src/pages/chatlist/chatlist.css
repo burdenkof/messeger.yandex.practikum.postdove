@@ -13,6 +13,20 @@
         min-width: 513px;
     }
 
+    .chat-list_toolbar{
+        padding: 20px!important;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .form-button{
+            margin: 0px!important;
+            align-self: flex-end;
+            
+         
+        }
+    }
+
     .chat-list_messages-wrapper {
         flex-grow:25;
         height: calc(100vh);
