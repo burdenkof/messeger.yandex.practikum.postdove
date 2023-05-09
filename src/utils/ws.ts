@@ -1,8 +1,8 @@
 import EventBus from "./event-bus"
 
-enum WebSocketEvents {
+export enum WebSocketEvents {
     connected = 'connected',
-    close = 'close',
+    close_ = 'close',
     message = 'message'
 }
 
@@ -26,7 +26,7 @@ export default class WebSocketTransport {
             this.bus.emit(WebSocketEvents.connected);
         })
         this.ws.addEventListener('close', () => {
-            this.bus.emit(WebSocketEvents.close);
+            this.bus.emit(WebSocketEvents.close_);
         })
 
         this.ws.addEventListener('message', (data) => {
@@ -48,7 +48,7 @@ export default class WebSocketTransport {
         }, 5000)
 
 
-        this.bus.on(WebSocketEvents.close, () => {
+        this.bus.on(WebSocketEvents.close_, () => {
             clearInterval(this.pingInterval)
         })
 

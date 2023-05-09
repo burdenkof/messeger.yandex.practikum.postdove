@@ -1,6 +1,8 @@
 import { controllerChatlist } from '../../controllers/chatlist';
+import  { controllerMessages } from '../../controllers/messages';
 import { chatRow } from '../../types';
 import Block from '../../utils/base-block'
+import { store } from '../../utils/store';
 import buttonComponent from '../button/button';
 import { chatRowTemplate } from './template'
 
@@ -12,8 +14,8 @@ class chatRowComponent extends Block {
             id: 'btn-del-chat'+props.id,
             type: 'button',
             events: {
-                click: () => {
-                    
+                click: (e:Event) => {
+                    e.stopPropagation()
                     const del: boolean = confirm("Удалить чат?")
                     if (del) {
                         controllerChatlist.deleteChat(this.props.id)
@@ -21,7 +23,14 @@ class chatRowComponent extends Block {
                 }
             }
         })
-        super("div", {...props, btnDeleteChat});
+        super("div", {...props, btnDeleteChat, 
+            events:{
+                click: ()=>{
+                    store.set('currentChatId', this.props.id)
+                    controllerMessages.sendMessage(this.props.id, 'ololoolo')
+                }
+            }
+        })
     }
 
     render() {
