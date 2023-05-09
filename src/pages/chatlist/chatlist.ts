@@ -33,7 +33,7 @@ class pageChatList extends Block {
 
         let chatsUpdated: boolean = false
 
-        const oldChatList = oldProps.chatList ?? []
+        let oldChatList = oldProps.chatList ?? []
         if (newProps.chats !== undefined) {
             newProps.chats.map((value: chatRow, index: number) => {
                 if (!oldProps.chats || index >= oldChatList.length) {
@@ -45,6 +45,10 @@ class pageChatList extends Block {
 
                 }
             })
+            if(oldProps.chats && newProps.chats.length < oldProps.chats.length){
+                oldChatList.pop()
+               // this.setProps({chatList: oldChatList_})
+            }
         }
         return true;
 

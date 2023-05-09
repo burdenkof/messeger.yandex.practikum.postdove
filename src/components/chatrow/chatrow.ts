@@ -16,7 +16,7 @@ class chatRowComponent extends Block {
                     
                     const del: boolean = confirm("Удалить чат?")
                     if (del) {
-                        controllerChatlist.deleteChat(props.id)
+                        controllerChatlist.deleteChat(this.props.id)
                     }
                 }
             }

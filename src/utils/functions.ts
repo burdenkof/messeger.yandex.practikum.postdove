@@ -1,6 +1,6 @@
 import exp = require("constants");
 
-export type Indexed<T = unknown> = {
+export type Indexed<T = any> = {
     [key in string]: T;
   };
   function isEqual(x: Indexed, y: Indexed): boolean {
@@ -63,26 +63,24 @@ export type Indexed<T = unknown> = {
   }
   
  export function merge(lhs: Indexed, rhs: Indexed): Indexed {
-    for (var p in rhs) {
-      try {
-   
-        if ( typeof rhs[p] == "object"  ) {
-          lhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
-  
-        } else {
-          lhs[p] = rhs[p];
-  
+    for (let p in rhs) {
+        if (!rhs.hasOwnProperty(p)) {
+            continue;
         }
-  
-      } catch(e) {
-        // Property in destination object not set; create it and set its value.
-        lhs[p] = rhs[p];
-  
-      }
+
+        try {
+            if (rhs[p].constructor === Object) {
+                rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
+            } else {
+                lhs[p] = rhs[p];
+            }
+        } catch(e) {
+            lhs[p] = rhs[p];
+        }
     }
-   
-    return lhs
-  }
+
+    return lhs;
+}
   
   
   
