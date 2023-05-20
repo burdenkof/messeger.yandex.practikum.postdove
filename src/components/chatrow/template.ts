@@ -1,5 +1,5 @@
 export const  chatRowTemplate: string =
-`<div class="chat-list_one-row">
+`<div class="chat-list_one-row {{#if isSelected}} selected {{/if}}" >
     <div class="chat-list_one-row_avatar" >
         
     </div>

@@ -1,23 +1,25 @@
+import { profileInfo } from '../../types';
 import Block from '../../utils/base-block'
 import { messageRowTemplate } from './template'
 
 export enum messageType { input = 'input', output = 'output' }
 
 export type messageRow = {
-    chat_id: "number",
-    time: "string",
-    type: "string",
+    chat_id: number,
+    time: string,
+    type: string,
     outType: messageType,
-    user_id: "string",
-    content: "string",
+    user_id: number,
+    content: string,
+    userInfo: profileInfo,
     file?: {
-        id: "number",
-        user_id: "number",
-        path: "string",
-        filename: "string",
-        content_type: "string",
-        content_size: "number",
-        upload_date: "string",
+        id: number,
+        user_id: number,
+        path: string,
+        filename: string,
+        content_type: string,
+        content_size: number,
+        upload_date: string,
     }   
 }
 

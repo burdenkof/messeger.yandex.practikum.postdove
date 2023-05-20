@@ -11,6 +11,7 @@ export type profileInfo = {
     role?:String;
 }
 export type chatRow = {
+    isSelected?: boolean,
     id: number;
     title: string;
     avatar?: string;

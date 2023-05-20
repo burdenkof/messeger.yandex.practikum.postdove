@@ -88,3 +88,7 @@
 .chat-list_one-row:hover {
     background: #e9e9ec;
 }
+
+.chat-list_one-row.selected {
+    border: 1px solid orange!important;
+}

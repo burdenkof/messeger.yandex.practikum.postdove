@@ -52,6 +52,7 @@ class pageChatList extends Block {
 
         if (newProps.chats !== undefined) {
             newProps.chats.map((value: chatRow, index: number) => {
+                value.isSelected = value.id == store.getState().currentChatId
                 if (!oldProps.chats || index >= oldChatList.length) {
                     oldChatList.push(new chatRowComponent(value))
                     chatsUpdated = true
@@ -160,30 +161,7 @@ export const renderChatList = (): Block => {
         }
     })
 
-    /*     setTimeout(()=> {
-            const oldChats = JSON.parse(JSON.stringify(page.props.chats))
-            oldChats.push({
-                id: 1,
-                title: "test2",
-                unread_count:12,
-                last_message: {
-                    user:{
-                        first_name: "ololoo",
-                        second_name: "olololo",
-                        avatar: "",
-                        email: "bu@ya.ru",
-                        phone: "t575755",
-                        login: "bu"
-    
-                    },
-                    time: "01.01.2023",
-                    content:'test'
-    
-                }
-    
-            })
-            page.setProps({chats: oldChats})
-        }, 2000) */
+
     return page
 }
 

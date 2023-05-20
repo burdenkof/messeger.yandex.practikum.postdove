@@ -41,6 +41,10 @@
         li{
             display: block;
         }
+
+        li.selected{
+            border: 1px solid orange;
+        }
     }
 
     .chat-list_message-list{

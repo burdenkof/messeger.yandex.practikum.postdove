@@ -34,6 +34,9 @@ export class ApiUsers extends ApiBase {
         return this.http.post('/search', { data: { login } });
     }
 
+    getUserInfo(userId: number): Promise<profileInfo> {
+        return this.http.get(`/${userId}`);
+    }
     create = undefined;
     delete = undefined;
     read = undefined;

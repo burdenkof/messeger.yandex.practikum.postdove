@@ -29,6 +29,12 @@
             font-size: 11px;
         }
 
+        .message-list_one-row_user_info{
+            margin-top:-20px;
+            align-self: flex-start;
+            font-size: 11px;
+        }
+
     }
 
 }

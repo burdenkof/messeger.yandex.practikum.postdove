@@ -6,6 +6,10 @@ class ControllerUsers {
 
     async search(login: string){
         return await this.model.search(login)
+    }    
+    
+    async getUserInfo(userId: number){
+        return await this.model.getUserInfo(userId)
     }
 
 }
