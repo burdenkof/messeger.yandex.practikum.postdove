@@ -1,3 +1,4 @@
+import { messageRow, messageType } from "../components/messagerow/messagerow";
 import { Indexed } from "../utils/functions";
 import { store } from "../utils/store";
 import WebSocketTransport, { WebSocketEvents } from "../utils/ws";
@@ -54,16 +55,26 @@ class ControllerMessages {
             WebSocketEvents.message,
             (data: any) => {
                 let newMessages = []
+                const parsedData = JSON.parse(data.data)
+                const oldState = store.getState()
 
-                if (Array.isArray(data)) {
-                    newMessages = data
+                const messages = oldState.messages??[]
+                
+                let old = messages[chatId]??[]
+                if (Array.isArray(parsedData)) {
+                    parsedData.reverse().map((value: messageRow, i) =>{
+                        value.outType = value.user_id == oldState.profileInfo.id? messageType.output:messageType.input
+                        newMessages.push(value)
+                    })
+                    old =[]
                 } else {
-                    newMessages.push(data.data);
+                    if(parsedData.type !== 'message') return
+                    parsedData.outType = parsedData.user_id == oldState.profileInfo.id? messageType.output:messageType.input
+                    newMessages.push(parsedData);
                 }
 
-                const old = store.getState().messages??[]
 
-                store.set(`messages.${chatId}`, [...old, newMessages]);
+                store.set(`messages.${chatId}`, [...old, ...newMessages]);
 
             },
         )

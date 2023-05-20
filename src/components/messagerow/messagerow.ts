@@ -4,13 +4,21 @@ import { messageRowTemplate } from './template'
 export enum messageType { input = 'input', output = 'output' }
 
 export type messageRow = {
-    delivered?: Boolean,
-    readed?: Boolean,
-    userName?: String,
-    type?: messageType,
-    text?: String,
-    time?: String,
-    html?: String
+    chat_id: "number",
+    time: "string",
+    type: "string",
+    outType: messageType,
+    user_id: "string",
+    content: "string",
+    file?: {
+        id: "number",
+        user_id: "number",
+        path: "string",
+        filename: "string",
+        content_type: "string",
+        content_size: "number",
+        upload_date: "string",
+    }   
 }
 
 class messageRowComponent extends Block {

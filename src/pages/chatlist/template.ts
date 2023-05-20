@@ -12,7 +12,7 @@ export const  chatListTemplate =
     </aside>
     <div class="chat-list_messages-wrapper">
         <div class="chat-list_message-list">
-            {{#each messages}}
+            {{#each messagesList}}
                 {{{this}}}
             {{/each}}
         </div>

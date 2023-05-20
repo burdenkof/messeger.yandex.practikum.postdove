@@ -5,7 +5,7 @@ import { store } from "../utils/store";
 class ControllerChatlist {
     private model: ApiChats = new ApiChats();
 
-    getToken(id: number) {
+    async getToken(id: number) {
         return this.model.getToken(id)
     }
     async addChat(data: {title: string}) {
@@ -25,6 +25,17 @@ class ControllerChatlist {
     async deleteChat(chatId: number) {
         await this.model.delete(chatId)
         this.getChats()
+    }
+    async addUserToChat(userId: number, chatId: number) {
+
+        const data = {
+            users: [
+              userId
+            ],
+            chatId: chatId
+          }
+        await this.model.update(data)
+        await this.getChats()
     }
 
 
