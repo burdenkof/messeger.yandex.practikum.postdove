@@ -1,4 +1,5 @@
 import { ApiUsers } from "../api/users";
+import { profileInfo } from "../types";
 
 
 class ControllerUsers {
@@ -10,6 +11,10 @@ class ControllerUsers {
     
     async getUserInfo(userId: number){
         return await this.model.getUserInfo(userId)
+    }    
+    
+    async saveUserInfo(data: profileInfo){
+        return await this.model.update(data)
     }
 
 }

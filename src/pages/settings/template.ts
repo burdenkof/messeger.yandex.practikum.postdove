@@ -9,10 +9,10 @@ export const  settingsTemplate:string =
     <div class="pages-settings_profile-card">
         <div class="pages-settings_profile-card_avatar"></div>
         <div class="pages-settings_profile-card_info">
-            <span class="pages-settings_profile-card_info_name">{{currentUser.firstName}} {{currentUser.secondName}}</span>
+            <span class="pages-settings_profile-card_info_name">{{currentUser.first_name}} {{currentUser.second_name}}</span>
             <span class="pages-settings_profile-card_info_email">{{currentUser.email}}</span>
             <span class="pages-settings_profile-card_info_phone">{{currentUser.phone}}</span>
-            <span class="pages-settings_profile-card_info_nickname">{{currentUser.displayName}}</span>
+            <span class="pages-settings_profile-card_info_nickname">{{currentUser.display_name}}</span>
         </div>
     </div>
     <div class="form-buttons inline">

@@ -6,6 +6,9 @@ import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
 import { PregErrors, PregValidate } from "../../../utils/pregValidates";
 import { profileInfo } from "../../../types";
+import { store } from "../../../utils/store";
+import { controllerUsers } from "../../../controllers/users";
+import { paths, router } from "../../../utils/routes";
 
 class pageSettingsEdit extends Block {
     constructor(props: any) {
@@ -20,7 +23,7 @@ class pageSettingsEdit extends Block {
 export function renderSettingsEdit():Block {
 
 
-    const validate = (e: Event) => {
+    const validate = async (e: Event) => {
         if (e.target === null) return
 
         let data: any
@@ -99,23 +102,23 @@ export function renderSettingsEdit():Block {
 
         if (e.target instanceof HTMLFormElement && errors == 0) {
             console.log(data)
+            const state = store.getState()
+
+            let currentUser: profileInfo = state.profileInfo
+            Object.assign(currentUser, data)
+            console.log(currentUser)
+            await controllerUsers.saveUserInfo(currentUser)
+            router.go(paths.settings)
         }
 
     }
-    const currentUser: profileInfo = {
-        id: 42,
-        first_name: 'Whill',
-        second_name: 'Smith',
-        phone: '+7 (927) 999-99-99',
-        email: 'budenkof@yandex.ru',
-        display_name: 'Charmng',
-        login: 'burdenkof',
-        password: 'dtdtmyytt45m',
-        avatar: ''
-    }
+    const state = store.getState()
+
+    const currentUser: profileInfo = state.profileInfo
 
     // Имена полей для изменения информации о пользователе: first_name, second_name, display_name, login, email, phone;
     const itemFirstName: inputComponent = new inputComponent({
+        value: currentUser.first_name,
         name: 'first_name',
         placeholder: 'Jonh',
         status: StatusFormControl.success,
@@ -132,6 +135,7 @@ export function renderSettingsEdit():Block {
 
 
     const itemSecondName: inputComponent = new inputComponent({
+        value: currentUser.second_name,
         name: 'second_name',
         placeholder: 'Smith',
         status: StatusFormControl.success,
@@ -148,6 +152,7 @@ export function renderSettingsEdit():Block {
 
 
     const itemDisplayName: inputComponent = new inputComponent({
+        value: currentUser.display_name,
         name: 'display_name',
         placeholder: 'Jo',
         status: StatusFormControl.success,
@@ -163,6 +168,7 @@ export function renderSettingsEdit():Block {
     })
 
     const itemLogin: inputComponent = new inputComponent({
+        value: currentUser.login,
         name: 'login',
         placeholder: 'Joker',
         status: StatusFormControl.success,
@@ -178,6 +184,7 @@ export function renderSettingsEdit():Block {
     })
 
     const itemEmail: inputComponent = new inputComponent({
+        value: currentUser.email,
         name: 'email',
         placeholder: 'box@domain.com',
         status: StatusFormControl.success,
@@ -194,6 +201,7 @@ export function renderSettingsEdit():Block {
 
 
     const itemPhone: inputComponent = new inputComponent({
+        value: currentUser.phone,
         name: 'phone',
         placeholder: '+7 (927) 999-99-99',
         status: StatusFormControl.success,

@@ -9,11 +9,12 @@ import { chatRow } from "../../types"
 import buttonComponent from "../../components/button/button"
 import { controllerChatlist } from "../../controllers/chatlist"
 import { controllerMessages } from "../../controllers/messages"
+import { paths, router } from "../../utils/routes"
 
 class pageChatList extends Block {
 
 
-    constructor(props: { chats?: chatRow[], messages?: messageRow[], btnAddChat: buttonComponent, events?: unknown }) {
+    constructor(props: { chats?: chatRow[], messages?: messageRow[], btnAddChat: buttonComponent, btnProfile: buttonComponent, events?: unknown }) {
 
         const chatList: chatRowComponent[] = []
         if (props.chats) {
@@ -152,14 +153,25 @@ export const renderChatList = (): Block => {
             }
         }
     })
+    const btnProfile: buttonComponent = new buttonComponent({
+        name: 'Profile',
+        id: 'btn-profile',
+        type: 'button',
+        events: {
+            click: () => {
+                router.go(paths.settings)
+            }
+        }
+    })
     const page = new pageChatList({
-        chats, messages, btnAddChat,
+        chats, messages, btnAddChat,btnProfile, 
         events: {
             submit: (e: SubmitEvent) => {
                 validate(e)
             }
         }
     })
+    controllerChatlist.getChats()
 
 
     return page

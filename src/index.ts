@@ -13,23 +13,7 @@ import { chatRow } from "./types";
 import { router, paths } from "./utils/routes";
 
 window.addEventListener('DOMContentLoaded', async () => {
-  let list: chatRow[] = []; let messages: messageRow[] = [];
-  for (let i = 0; i < 15; i++) {
- 
 
-    messages.push(
-      {
-        userName: 'Will smith',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-        time: '09.09.2023 19:45',
-        type: i % 2 == 0 ? messageType[messageType.input] : messageType[messageType.output],
-        delivered: i % 2 == 0,
-        readed: i % 3 == 0,
-      })
-
-
-
-  }
   router
     .use(paths.main, () => renderPagelist())
     .use(paths.login, () => renderLogin())
@@ -54,7 +38,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
    
     try{
-      router.start()  
+      //router.start()  
       
       await controllerAuth.getProfile()
       await controllerChatlist.getChats()

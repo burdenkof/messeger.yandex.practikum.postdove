@@ -1,14 +1,14 @@
 export type profileInfo = {
-    first_name: String,
-    second_name: String,
-    phone: String,
-    email: String,
-    display_name: String,
-    login: String,
-    password: String
+    first_name: string,
+    second_name: string,
+    phone: string,
+    email: string,
+    display_name: string,
+    login: string,
+    password: string
     id: number;
-    avatar: String;
-    role?:String;
+    avatar: string;
+    role?: string;
 }
 export type chatRow = {
     isSelected?: boolean,
