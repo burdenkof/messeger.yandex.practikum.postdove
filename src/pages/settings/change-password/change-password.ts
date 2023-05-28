@@ -5,6 +5,9 @@ import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
 import { PregErrors, PregValidate } from "../../../utils/pregValidates";
 import { profileInfo } from "../../../types";
+import { controllerUsers } from "../../../controllers/users";
+import { controllerAuth } from "../../../controllers/auth";
+import { paths, router } from "../../../utils/routes";
 
 class pageChangePassword extends Block {
     constructor(props: any) {
@@ -18,7 +21,7 @@ class pageChangePassword extends Block {
 
 export function renderChangePassword():Block {
 
-    const validate = (e: Event) => {
+    const validate = async (e: Event) => {
         if (e.target === null) return
        
         let data: any
@@ -67,7 +70,17 @@ export function renderChangePassword():Block {
         }
 
         if (e.target instanceof HTMLFormElement && errors == 0) {
-            console.log(data)
+            try{
+                await controllerUsers.changePassword({oldPassword: data.current_password, newPassword: data.new_password})
+                router.go(paths.settings)
+            }catch(e){
+                itemCurrentPassword.setProps({
+                    status: StatusFormControl.error,
+                    error: e.reason
+                })
+                
+            }
+
         }
 
     }

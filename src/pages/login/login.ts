@@ -59,12 +59,19 @@ export function renderLogin():Block {
     })
     const page = new pageLogin({
         itemLogin, itemPassword, btnSignIn, btnSignUp, events: {
-            submit: (e: SubmitEvent) => {
+            submit: async (e: SubmitEvent) => {
                 e.preventDefault()
                 let data: any
                 if (e.target instanceof HTMLFormElement) {
                      data = getFormData(e.target)
-                     controllerAuth.singin(data)
+                     try{
+                        await controllerAuth.singin(data)
+                     }catch(e){
+                        itemPassword.setProps({
+                            status:StatusFormControl.error,
+                            error: e.reason
+                        })
+                     }
                 }
             }
         }

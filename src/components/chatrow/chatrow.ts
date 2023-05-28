@@ -3,6 +3,7 @@ import { controllerMessages } from '../../controllers/messages';
 import { controllerUsers } from '../../controllers/users';
 import { chatRow, profileInfo } from '../../types';
 import Block from '../../utils/base-block'
+import { bus } from '../../utils/event-bus';
 import { store } from '../../utils/store';
 import buttonComponent from '../button/button';
 import { chatRowTemplate } from './template'
@@ -36,11 +37,11 @@ class chatRowComponent extends Block {
                     e.stopPropagation()
                     const login: string | null = prompt("Укажите логин  пользователя для добавления в чат")
                     if (login) {
-                        const searchInfo:profileInfo[] = await controllerUsers.search(login)
+                        const searchInfo: profileInfo[] = await controllerUsers.search(login)
                         console.log(searchInfo)
                         if (searchInfo) {
                             controllerChatlist.addUserToChat(searchInfo[0].id, props.id)
-                        } else{
+                        } else {
                             alert("Данный логин не найден")
                         }
                     }
@@ -50,9 +51,18 @@ class chatRowComponent extends Block {
         super("div", {
             ...props, btnDeleteChat, btnAddUserToChat,
             events: {
-                click: () => {
+                click: (e: PointerEvent) => {
                     store.set('currentChatId', this.props.id)
                     controllerMessages.getAllMessages(this.props.id)
+                    const target:HTMLInputElement|null = (e.target as HTMLInputElement)
+                
+                    if(target != null && (target.className == 'chat-list_one-row_avatar' || target.className ==   'chat-list_one-row_avatar_img')){
+                        const input = document.createElement('input');
+                        input.type = 'file';
+
+
+                       bus.emit('chatAvatarClicked', {chatId:this.props.id, input: input})
+                    }
                 }
             }
         })

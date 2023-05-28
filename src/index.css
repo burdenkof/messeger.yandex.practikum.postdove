@@ -33,6 +33,10 @@ main {
     justify-content: center;
 }
 
+.hidden{
+    display: none
+}
+
 .wrapper{
     max-width: 1920px;
     display: flex;

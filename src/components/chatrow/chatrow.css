@@ -18,6 +18,11 @@
         background: #c1b8f5;
         margin:5px;
         margin-right: 16px;
+        box-sizing: border-box;
+    }   
+
+    .chat-list_one-row_avatar:hover{
+        border:1px solid orange;
     }
 
 

@@ -8,7 +8,7 @@ class ControllerChatlist {
     async getToken(id: number) {
         return this.model.getToken(id)
     }
-    async addChat(data: {title: string}) {
+    async addChat(data: { title: string }) {
         await this.model.create(data)
         await this.getChats()
     }
@@ -21,7 +21,7 @@ class ControllerChatlist {
     async getChatInfo(chatId: number): Promise<chatRow[]> {
         return this.model.getChatInfo(chatId)
     }
-    
+
     async deleteChat(chatId: number) {
         await this.model.delete(chatId)
         this.getChats()
@@ -30,14 +30,16 @@ class ControllerChatlist {
 
         const data = {
             users: [
-              userId
+                userId
             ],
             chatId: chatId
-          }
+        }
         await this.model.update(data)
         await this.getChats()
     }
-
+    async setAvatar(data: FormData) {
+        await this.model.setAvatar(data)
+    }
 
 }
 export const controllerChatlist = new ControllerChatlist()

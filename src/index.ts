@@ -1,21 +1,17 @@
-import { messageRow, messageType } from "./components/messagerow/messagerow";
 import { controllerAuth } from "./controllers/auth";
 import { controllerChatlist } from "./controllers/chatlist";
 import { renderChatList } from "./pages/chatlist/chatlist";
 import { renderErrorPage } from "./pages/errorpage/errorpage";
 import { doLogout, renderLogin } from "./pages/login/login";
-import renderPagelist from "./pages/pagelist/pagelist";
 import { renderChangePassword } from "./pages/settings/change-password/change-password";
 import { renderSettings } from "./pages/settings/settings";
 import { renderSettingsEdit } from "./pages/settings/settings-edit/settings-edit";
 import { renderSignup } from "./pages/signup/signup";
-import { chatRow } from "./types";
 import { router, paths } from "./utils/routes";
 
 window.addEventListener('DOMContentLoaded', async () => {
 
   router
-    .use(paths.main, () => renderPagelist())
     .use(paths.login, () => renderLogin())
     .use(paths.logout,  () =>  doLogout())
     .use(paths.signup, () => renderSignup())
@@ -28,8 +24,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     let isPublicRoute = false
 
-    if(window.location.pathname == paths.main
-      || window.location.pathname == paths.login
+    if( window.location.pathname == paths.login
       || window.location.pathname == paths.signup){
             isPublicRoute = true
       }
@@ -43,12 +38,9 @@ window.addEventListener('DOMContentLoaded', async () => {
       await controllerAuth.getProfile()
       await controllerChatlist.getChats()
 
-      
-      if(isPublicRoute ){
-        router.go(paths.chatlist)
-      }
+       router.go(paths.chatlist)
 
-    router.start();
+    router.start()
       }catch(e){
         router.start()  
         if(!isPublicRoute){

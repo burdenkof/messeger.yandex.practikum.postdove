@@ -5,11 +5,14 @@ import { inputTemplate } from './template';
 
 export enum StatusFormControl {
     success = 'success',
-    error = 'error'
+    error = 'error',
+    hidden = 'hidden',
 }
 export enum TypeFormControl {
     text = 'text',
     password = 'password',
+    file = 'file',
+   
     email = 'email'
 }
 
@@ -23,10 +26,14 @@ export type inputState = {
     type?: TypeFormControl,
     pattern?: string,
     events?: any,
-    value?: string
+    value?: string,
+    hidden?: boolean
 }
 class inputComponent extends Block {
     constructor(props: inputState) {
+        if(props.type == TypeFormControl.file){
+            props.hidden = true
+        }
         super('div', props);
     }
 

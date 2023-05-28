@@ -10,11 +10,14 @@ import buttonComponent from "../../components/button/button"
 import { controllerChatlist } from "../../controllers/chatlist"
 import { controllerMessages } from "../../controllers/messages"
 import { paths, router } from "../../utils/routes"
+import { controllerAuth } from "../../controllers/auth"
+import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input"
+import { bus } from "../../utils/event-bus"
 
 class pageChatList extends Block {
 
 
-    constructor(props: { chats?: chatRow[], messages?: messageRow[], btnAddChat: buttonComponent, btnProfile: buttonComponent, events?: unknown }) {
+    constructor(props: { chats?: chatRow[], messages?: messageRow[], fileInput: inputComponent, btnAddChat: buttonComponent, btnProfile: buttonComponent,btnLogout: buttonComponent, events?: unknown }) {
 
         const chatList: chatRowComponent[] = []
         if (props.chats) {
@@ -39,7 +42,29 @@ class pageChatList extends Block {
             if(state.currentChatId && state.messages && state.messages[state.currentChatId]){
                 this.setProps({messages: state.messages[state.currentChatId]})
             }
-        });
+        })
+        bus.on('chatAvatarClicked', (data:{input: HTMLInputElement, chatId: number})=>{
+            
+            const input: HTMLInputElement = data.input
+
+
+            input.onchange = async e => { 
+                if(e.target === null) return
+                const targetInput:HTMLInputElement|null = (e.target as HTMLInputElement)
+               
+                if(targetInput.files === null) return
+               // getting a hold of the file reference
+               const file = targetInput.files[0]; 
+               const formData = new FormData();
+               formData.append('chatId', data.chatId.toString());
+               formData.append('avatar', file);
+               await controllerChatlist.setAvatar(formData)
+               await controllerChatlist.getChats()            
+            }
+            
+            input.click()
+            
+        })
     }
     componentDidUpdate(oldProps: { chats?: chatRow[], messages?: messageRow[], chatList?: chatRowComponent[], messagesList?: messageRowComponent[] },
         newProps: { chats?: chatRow[], messages?: messageRow[], chatList: chatRowComponent[], messagesList?: messageRowComponent[] }): boolean {
@@ -162,9 +187,28 @@ export const renderChatList = (): Block => {
                 router.go(paths.settings)
             }
         }
+    })    
+    
+    const btnLogout: buttonComponent = new buttonComponent({
+        name: '<i class="fa-solid fa-arrow-right-from-bracket"></i>',
+        id: 'btn-profile',
+        type: 'button',
+        events: {
+            click: () => {
+                controllerAuth.logout()
+            }
+        }
+    })
+    const fileInput: inputComponent = new inputComponent({
+        name: 'password',
+        status: StatusFormControl.hidden,
+        label: 'Password',
+        placeholder: '',
+        error: '',
+        type: TypeFormControl.file
     })
     const page = new pageChatList({
-        chats, messages, btnAddChat,btnProfile, 
+        chats, messages, btnAddChat,btnProfile, btnLogout,fileInput,
         events: {
             submit: (e: SubmitEvent) => {
                 validate(e)

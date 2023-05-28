@@ -15,6 +15,13 @@ class ControllerUsers {
     
     async saveUserInfo(data: profileInfo){
         return await this.model.update(data)
+    }    
+    async changePassword(data: {oldPassword: string; newPassword: string}){
+        return await this.model.setPassword(data)
+    }    
+    
+    async setAvatar(data: FormData){
+        return await this.model.setAvatar(data)
     }
 
 }

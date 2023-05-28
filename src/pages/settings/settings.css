@@ -22,7 +22,13 @@
             width: 171px;
             height:171px;
             border-radius: 150px;
-            cursor:pointer;
+            cursor:pinter;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .pages-settings_profile-card_avatar:hover{
+            border:1px solid orange;
         }
 
         .pages-settings_profile-card_info{
@@ -41,7 +47,7 @@
             }
         }
     }
-    
+
     .form-buttons {
         width: 543px;
         justify-content: flex-end;

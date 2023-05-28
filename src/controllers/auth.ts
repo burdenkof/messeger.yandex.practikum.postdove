@@ -31,14 +31,10 @@ class ControllerAuth {
     }
     public async singin(data: {login: string; password: string;
     }){
-
-        try{
             await this.model.signin(data)
             await this.getProfile()
             router.go(paths.chatlist)
-        }catch(E: any){
-            console.log(E.message)
-        }
+        
     }
 
     public async logout(){

@@ -1,7 +1,9 @@
 export const  chatRowTemplate: string =
 `<div class="chat-list_one-row {{#if isSelected}} selected {{/if}}" >
     <div class="chat-list_one-row_avatar" >
-        
+        {{#if avatar}}
+            <img width="95"  class="chat-list_one-row_avatar_img" src="https://ya-praktikum.tech/api/v2/resources{{avatar}}"/>
+        {{/if}}
     </div>
     <div class="chat-list_one-row_main-info"  >
         

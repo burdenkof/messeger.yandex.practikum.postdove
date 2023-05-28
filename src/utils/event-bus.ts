@@ -41,3 +41,4 @@ class EventBus {
   }
 }
 export default EventBus
+export const bus:EventBus = new EventBus
