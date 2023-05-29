@@ -31,7 +31,13 @@ export default class WebSocketTransport {
 
         this.ws.addEventListener('message', (data) => {
 
-            const message = JSON.parse(data.data)
+            let message = null
+            try{
+            message = JSON.parse(data.data)
+            }catch(e){
+                console.log(e)
+                return
+            }
             if (message.type !== undefined && message.type == 'pong') {
                 return
             }

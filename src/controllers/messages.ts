@@ -56,42 +56,48 @@ class ControllerMessages {
             WebSocketEvents.message,
             async (data: any) => {
                 let newMessages: messageRow[] = []
-                const parsedData = JSON.parse(data.data)
+                let parsedData = []
+                try {
+                    parsedData = JSON.parse(data.data)
+                } catch (e) {
+                    console.log(e)
+                    // return
+                }
                 const oldState = store.getState()
 
-                const messages = oldState.messages??[]
-                
-                let old = messages[chatId]??[]
+                const messages = oldState.messages ?? []
+
+                let old = messages[chatId] ?? []
                 if (Array.isArray(parsedData)) {
-                    
+
                     parsedData.reverse();
-                    await Promise.all(parsedData.map(async (value: messageRow) =>{
-                        if(oldState.users && oldState.users[value.user_id]){
+                    await Promise.all(parsedData.map(async (value: messageRow) => {
+                        if (oldState.users && oldState.users[value.user_id]) {
                             value.userInfo = oldState.users[value.user_id]
-                        } else{
+                        } else {
                             value.userInfo = await controllerUsers.getUserInfo(value.user_id)
-                            store.set(`users.${value.user_id}`,value.userInfo)
+                            store.set(`users.${value.user_id}`, value.userInfo)
                         }
-                        value.outType = value.user_id == oldState.profileInfo.id? messageType.output:messageType.input
-                        
+                        value.outType = value.user_id == oldState.profileInfo.id ? messageType.output : messageType.input
+
                         newMessages.push(value)
                     }))
 
                 } else {
-                    if(parsedData.type != 'message') return
-                    parsedData.outType = parsedData.user_id == oldState.profileInfo.id? messageType.output:messageType.input
-                    if(oldState.users && oldState.users[parsedData.user_id]){
+                    if (parsedData.type != 'message') return
+                    parsedData.outType = parsedData.user_id == oldState.profileInfo.id ? messageType.output : messageType.input
+                    if (oldState.users && oldState.users[parsedData.user_id]) {
                         parsedData.userInfo = oldState.users[parsedData.user_id]
-                    } else{
+                    } else {
                         parsedData.userInfo = await controllerUsers.getUserInfo(parsedData.user_id)
-                        store.set(`users.${parsedData.user_id}`,parsedData.userInfo)
+                        store.set(`users.${parsedData.user_id}`, parsedData.userInfo)
                     }
                     newMessages.push(parsedData);
-                    
+
                 }
                 store.set(`messages.${chatId}`, [...old, ...newMessages])
 
-                
+
 
             },
         )
