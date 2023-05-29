@@ -1,3 +1,4 @@
+import * as sanitizeHtml from 'sanitize-html';
 import { profileInfo } from "../types";
 import { ApiBase } from "./base";
 
@@ -16,6 +17,14 @@ export class ApiUsers extends ApiBase {
         email: string;
         phone: string;
     }) {
+
+
+        data.first_name = sanitizeHtml(data.first_name)
+        data.second_name = sanitizeHtml(data.second_name)
+        data.login = sanitizeHtml(data.login)
+        data.email = sanitizeHtml(data.email)
+        data.phone = sanitizeHtml(data.phone)
+
         return this.http.put('/profile', { data });
     }
 
@@ -23,6 +32,8 @@ export class ApiUsers extends ApiBase {
         oldPassword: string;
         newPassword: string;
     }) {
+        data.oldPassword = sanitizeHtml(data.oldPassword)
+        data.newPassword = sanitizeHtml(data.newPassword)
         return this.http.put('/password', { data });
     }
 
@@ -31,6 +42,7 @@ export class ApiUsers extends ApiBase {
     }
 
     search(login: string): Promise<profileInfo[]> {
+        login = sanitizeHtml(login)
         return this.http.post('/search', { data: { login } });
     }
 
@@ -42,3 +54,4 @@ export class ApiUsers extends ApiBase {
     read = undefined;
 
 }
+ 

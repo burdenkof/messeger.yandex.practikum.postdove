@@ -1,3 +1,4 @@
+import * as sanitizeHtml from 'sanitize-html';
 import { chatDeleted, chatRow, profileInfo } from "../types";
 import { ApiBase } from "./base";
 
@@ -18,6 +19,7 @@ export class ApiChats extends ApiBase {
     }
 
     create(data: {title: string}) {
+        data.title = sanitizeHtml(data.title)
         return this.http.post('', {data});
     }
 
@@ -31,6 +33,7 @@ export class ApiChats extends ApiBase {
         users: number[],
         chatId: number,
     }): Promise<{ reason: string }> {
+
         return this.http.put('/users', {data:newUsersToChat});
     }
 
@@ -49,3 +52,4 @@ export class ApiChats extends ApiBase {
     read = undefined
 
 }
+ 

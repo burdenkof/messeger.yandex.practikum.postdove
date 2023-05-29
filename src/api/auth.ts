@@ -1,14 +1,15 @@
+import * as sanitizeHtml from 'sanitize-html';
 import { profileInfo } from "../types";
 import { ApiBase } from "./base";
-
-
-
+ 
 export class ApiAuth extends ApiBase {
     constructor() {
         super('/auth');
     }
 
     signin(data: {login: string, password: string}) {
+        data.login = sanitizeHtml(data.login)
+        data.password = sanitizeHtml(data.password)
         return this.http.post('/signin', {data});
     }
 
@@ -20,6 +21,14 @@ export class ApiAuth extends ApiBase {
         password: string;
         phone: string;
     }) {
+
+        data.first_name = sanitizeHtml(data.first_name)
+        data.second_name = sanitizeHtml(data.second_name)
+        data.login = sanitizeHtml(data.login)
+        data.email = sanitizeHtml(data.email)
+        data.password = sanitizeHtml(data.password)
+        data.phone = sanitizeHtml(data.phone)
+
         return this.http.post('/signup', {data});
     }
 

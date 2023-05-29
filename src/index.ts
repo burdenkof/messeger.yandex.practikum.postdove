@@ -7,45 +7,50 @@ import { renderChangePassword } from "./pages/settings/change-password/change-pa
 import { renderSettings } from "./pages/settings/settings";
 import { renderSettingsEdit } from "./pages/settings/settings-edit/settings-edit";
 import { renderSignup } from "./pages/signup/signup";
+import { profileInfo } from "./types";
 import { router, paths } from "./utils/routes";
 
 window.addEventListener('DOMContentLoaded', async () => {
 
   router
     .use(paths.login, () => renderLogin())
-    .use(paths.logout,  () =>  doLogout())
+    .use(paths.logout, () => doLogout())
     .use(paths.signup, () => renderSignup())
     .use(paths.settings, () => renderSettings())
     .use(paths.settingsEdit, () => renderSettingsEdit())
     .use(paths.changePassword, () => renderChangePassword())
+    .use(paths.main, () => renderChatList())    
     .use(paths.chatlist, () => renderChatList())
     .use(paths.error404, () => renderErrorPage())
     .use(paths.error500, () => renderErrorPage(500, 'Something broke', 'We are already fixing'))
 
-    let isPublicRoute = false
+  let isPublicRoute = false
 
-    if( window.location.pathname == paths.login
-      || window.location.pathname == paths.signup){
-            isPublicRoute = true
-      }
+  if (window.location.pathname == paths.login
+    || window.location.pathname == paths.signup) {
+    isPublicRoute = true
+  }
 
 
 
-   
-    try{
-      //router.start()  
-      
-      await controllerAuth.getProfile()
-      await controllerChatlist.getChats()
 
-       router.go(paths.chatlist)
+  try {
+    //router.start()  
+
+    await controllerAuth.getProfile()
+    await controllerChatlist.getChats()
+
+
+
+
+   // router.go(paths.chatlist)
 
     router.start()
-      }catch(e){
-        router.start()  
-        if(!isPublicRoute){
-           router.go(paths.login)
-        }
-      }
- 
+  } catch (e) {
+    router.start()
+    if (!isPublicRoute) {
+      router.go(paths.login)
+    }
+  }
+
 })

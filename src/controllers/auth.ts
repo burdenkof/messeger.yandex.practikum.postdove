@@ -2,6 +2,7 @@ import { ApiAuth } from "../api/auth";
 import { profileInfo } from "../types";
 import {  store } from "../utils/store";
 import { paths, router } from "../utils/routes";
+import { controllerChatlist } from "./chatlist";
 
 
 
@@ -32,7 +33,8 @@ class ControllerAuth {
     public async singin(data: {login: string; password: string;
     }){
             await this.model.signin(data)
-            await this.getProfile()
+            await controllerAuth.getProfile()
+            await controllerChatlist.getChats()
             router.go(paths.chatlist)
         
     }
@@ -42,7 +44,7 @@ class ControllerAuth {
         try{
             await this.model.logout()
             store.clear()
-            router.go(paths.main)
+            window.location.reload()
         }catch(E: any){
             console.log(E.message)
         }
