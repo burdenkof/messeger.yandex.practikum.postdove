@@ -32,9 +32,9 @@ export default class WebSocketTransport {
         this.ws.addEventListener('message', (data) => {
 
             let message = null
-            try{
-            message = JSON.parse(data.data)
-            }catch(e){
+            try {
+                message = JSON.parse(data.data)
+            } catch (e) {
                 console.log(e)
                 return
             }
