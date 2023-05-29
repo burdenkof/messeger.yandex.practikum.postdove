@@ -1,15 +1,13 @@
 import { changePasswordTemplate } from "./template";
-import { getFormData,  pregCheck } from "../../../utils/renderDOM";
+import { getFormData, pregCheck } from "../../../utils/renderDOM";
 import Block from "../../../utils/base-block";
 import buttonComponent from "../../../components/button/button";
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../../components/input/input";
 import { PregErrors, PregValidate } from "../../../utils/pregValidates";
-import { profileInfo } from "../../../types";
 import { controllerUsers } from "../../../controllers/users";
-import { controllerAuth } from "../../../controllers/auth";
 import { paths, router } from "../../../utils/routes";
 
-class pageChangePassword extends Block {
+class PageChangePassword extends Block {
     constructor(props: any) {
         super('div', props)
     }
@@ -19,11 +17,11 @@ class pageChangePassword extends Block {
 }
 
 
-export function renderChangePassword():Block {
+export function renderChangePassword(): Block {
 
     const validate = async (e: Event) => {
         if (e.target === null) return
-       
+
         let data: any
         if (e.target instanceof HTMLFormElement) {
             e.preventDefault()
@@ -36,7 +34,7 @@ export function renderChangePassword():Block {
         }
         let errors = 0
 
-    
+
 
         if (data.new_password && !pregCheck(PregValidate.password, data.new_password)) {
             errors++
@@ -54,7 +52,7 @@ export function renderChangePassword():Block {
         }
 
 
-        if (  data.new_password2 != data.new_password) {
+        if (data.new_password2 != data.new_password) {
             errors++
             itemNewPassword2.setProps({
                 status: StatusFormControl.error,
@@ -70,39 +68,29 @@ export function renderChangePassword():Block {
         }
 
         if (e.target instanceof HTMLFormElement && errors == 0) {
-            try{
-                await controllerUsers.changePassword({oldPassword: data.current_password, newPassword: data.new_password})
+            try {
+                await controllerUsers.changePassword({ oldPassword: data.current_password, newPassword: data.new_password })
                 router.go(paths.settings)
-            }catch(e){
+            } catch (e) {
                 itemCurrentPassword.setProps({
                     status: StatusFormControl.error,
                     error: e.reason
                 })
-                
+
             }
 
         }
 
     }
 
-    const currentUser: profileInfo = {
-        id:0,
-        avatar:'',
-        first_name: 'Whill',
-        second_name: 'Smith',
-        phone: '+7 (927) 999-99-99',
-        email: 'budenkof@yandex.ru',
-        display_name: 'Charmng',
-        login: 'burdenkof',
-        password: 'dtdtmyytt45m'
-    }
+
 
     const itemCurrentPassword: inputComponent = new inputComponent({
         name: 'current_password',
         placeholder: '',
         status: StatusFormControl.success,
         label: 'Current password',
-        pattern:PregValidate.password,
+        pattern: PregValidate.password,
         error: '',
         type: TypeFormControl.password
     })
@@ -115,7 +103,7 @@ export function renderChangePassword():Block {
         label: 'New password',
         error: '',
         type: TypeFormControl.password,
-        pattern:PregValidate.password,
+        pattern: PregValidate.password,
         events: {
             blur: (e: Event) => {
                 validate(e)
@@ -130,7 +118,7 @@ export function renderChangePassword():Block {
         label: 'Repeat password',
         error: '',
         type: TypeFormControl.password,
-        pattern:PregValidate.password,
+        pattern: PregValidate.password,
         events: {
             blur: (e: Event) => {
                 validate(e)
@@ -138,7 +126,13 @@ export function renderChangePassword():Block {
         }
     })
 
-
+    const btnBack: buttonComponent = new buttonComponent({
+        name: '<i class="fa-solid fa-angles-left"></i>',
+        id: 'btn-back',
+        type: 'button',
+        className: 'btn-back',
+        onclick: `window.location.href='${paths.settings}'`
+    })
     const btnSave: buttonComponent = new buttonComponent({
         name: 'Save',
         id: 'btn-save',
@@ -147,11 +141,11 @@ export function renderChangePassword():Block {
     })
 
 
-    const page: pageChangePassword = new pageChangePassword({
+    const page: PageChangePassword = new PageChangePassword({
         itemCurrentPassword,
         itemNewPassword,
         itemNewPassword2,
-        currentUser,
+        btnBack,
         btnSave,
         events: {
             submit: (e: SubmitEvent) => {

@@ -51,6 +51,12 @@ main {
     height: 237px;
 }
 
+
+.btn-back{
+    border-radius: 19px;
+    margin: 1px;
+}
+
 ::-webkit-scrollbar {
     width: 4px;
 }

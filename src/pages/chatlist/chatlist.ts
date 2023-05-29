@@ -14,7 +14,7 @@ import { controllerAuth } from "../../controllers/auth"
 import inputComponent, { StatusFormControl, TypeFormControl } from "../../components/input/input"
 import { bus } from "../../utils/event-bus"
 
-class pageChatList extends Block {
+class PageChatList extends Block {
 
 
     constructor(props: { chats?: chatRow[], messages?: messageRow[], fileInput: inputComponent, btnAddChat: buttonComponent, btnProfile: buttonComponent,btnLogout: buttonComponent, events?: unknown }) {
@@ -207,7 +207,7 @@ export const renderChatList = (): Block => {
         error: '',
         type: TypeFormControl.file
     })
-    const page = new pageChatList({
+    const page = new PageChatList({
         chats, messages, btnAddChat,btnProfile, btnLogout,fileInput,
         events: {
             submit: (e: SubmitEvent) => {
@@ -220,5 +220,3 @@ export const renderChatList = (): Block => {
 
     return page
 }
-
-

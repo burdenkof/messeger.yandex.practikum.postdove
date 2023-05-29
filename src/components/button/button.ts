@@ -3,6 +3,7 @@ import { buttonTemplate } from './template'
  
 export type buttonState = {
     name?: string,
+    className?: string,
     id?: string,
     type?: string,
     onclick?: string,

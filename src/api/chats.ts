@@ -37,6 +37,17 @@ export class ApiChats extends ApiBase {
         return this.http.put('/users', {data:newUsersToChat});
     }
 
+
+
+    deleteUserFromChat(data:  {
+        users: number[],
+        chatId: number,
+    }): Promise<{ reason: string }> {
+
+        return this.http.delete('/users', {data});
+    }
+
+
     setAvatar(data: FormData): Promise<chatRow> {
         return this.http.put('/avatar', {data});
     }
@@ -52,4 +63,3 @@ export class ApiChats extends ApiBase {
     read = undefined
 
 }
- 

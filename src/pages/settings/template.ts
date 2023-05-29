@@ -5,8 +5,10 @@ export const  settingsTemplate:string =
 </div>
 
 <div class="pages-login pages-settings">
+{{{btnBack}}}
     <h1 class="form-main-title">Profile</h1>
     <div class="pages-settings_profile-card">
+    
         <div class="pages-settings_profile-card_avatar">
         {{#if currentUser.avatar}}
              <img width="220"  class="pages-settings_profile-card_avatar_img" src="https://ya-praktikum.tech/api/v2/resources{{currentUser.avatar}}"/>

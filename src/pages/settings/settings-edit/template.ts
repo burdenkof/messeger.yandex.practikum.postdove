@@ -5,6 +5,7 @@ export const  settingsEditTemplate:string =
 </div>
 
 <div class="pages-login  pages-edit-settings">
+{{{btnBack}}}
     <form name="form1"   action="/#settings" method="post">
         <h1 class="form-main-title">Edit profile</h1>
             {{{itemFirstName}}}

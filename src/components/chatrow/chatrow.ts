@@ -53,6 +53,7 @@ class chatRowComponent extends Block {
             events: {
                 click: (e: PointerEvent) => {
                     store.set('currentChatId', this.props.id)
+                    store.set(`messages.${this.props.id}`, [])
                     controllerMessages.getAllMessages(this.props.id)
                     const target:HTMLInputElement|null = (e.target as HTMLInputElement)
                 

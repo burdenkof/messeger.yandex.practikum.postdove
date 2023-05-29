@@ -44,7 +44,7 @@ class ControllerAuth {
         try{
             await this.model.logout()
             store.clear()
-            window.location.reload()
+            window.location.href = paths.login
         }catch(E: any){
             console.log(E.message)
         }

@@ -7,7 +7,6 @@ import { renderChangePassword } from "./pages/settings/change-password/change-pa
 import { renderSettings } from "./pages/settings/settings";
 import { renderSettingsEdit } from "./pages/settings/settings-edit/settings-edit";
 import { renderSignup } from "./pages/signup/signup";
-import { profileInfo } from "./types";
 import { router, paths } from "./utils/routes";
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -19,7 +18,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(paths.settings, () => renderSettings())
     .use(paths.settingsEdit, () => renderSettingsEdit())
     .use(paths.changePassword, () => renderChangePassword())
-    .use(paths.main, () => renderChatList())    
+
     .use(paths.chatlist, () => renderChatList())
     .use(paths.error404, () => renderErrorPage())
     .use(paths.error500, () => renderErrorPage(500, 'Something broke', 'We are already fixing'))
@@ -38,14 +37,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     //router.start()  
 
     await controllerAuth.getProfile()
+  
     await controllerChatlist.getChats()
+  
 
-
-
-
-   // router.go(paths.chatlist)
 
     router.start()
+
   } catch (e) {
     router.start()
     if (!isPublicRoute) {

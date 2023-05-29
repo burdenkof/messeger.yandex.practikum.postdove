@@ -5,9 +5,10 @@ import { profileInfo } from "../../types";
 import { store } from "../../utils/store";
 import { controllerUsers } from "../../controllers/users";
 import { controllerAuth } from "../../controllers/auth";
+import { paths } from "../../utils/routes";
  
  
-class pageSettings extends Block {
+class PageSettings extends Block {
     constructor(props: any) {
         super('div', props)
     }
@@ -24,22 +25,30 @@ export function renderSettings():Block {
     const currentUser: profileInfo =  state.profileInfo
 
 
+    const btnBack: buttonComponent = new buttonComponent({
+        name: '<i class="fa-solid fa-angles-left"></i>',
+        id: 'btn-back',
+        type: 'button',
+        className:'btn-back',
+        onclick: `window.location.href='${paths.chatlist}'`
+    })
     const btnEdit: buttonComponent = new buttonComponent({
         name: 'Edit',
         id: 'btn-edit-settings',
         type: 'submit',
-        onclick: `window.location.href='/settings-edit'`
+        onclick: `window.location.href='${paths.settingsEdit}'`
     })
     const btnChangePassword: buttonComponent = new buttonComponent({
         name: 'Change pass',
         id: 'btn-change-password',
         type: 'button',
-        onclick: `window.location.href='/change-password'`
+        onclick: `window.location.href='${paths.changePassword}'`
     })
 
-    const page: pageSettings = new pageSettings({
+    const page: PageSettings = new PageSettings({
 
         currentUser,
+        btnBack,
         btnChangePassword,
         btnEdit,
         events: {
@@ -64,6 +73,8 @@ export function renderSettings():Block {
                        formData.append('avatar', file)
                        await controllerUsers.setAvatar(formData)
                        await controllerAuth.getProfile()
+                       const profile:profileInfo = (store.getState()).profileInfo
+                       page.setProps({currentUser: profile})
                                   
                     }
                     

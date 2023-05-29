@@ -10,7 +10,7 @@ import { store } from "../../../utils/store";
 import { controllerUsers } from "../../../controllers/users";
 import { paths, router } from "../../../utils/routes";
 
-class pageSettingsEdit extends Block {
+class PageSettingsEdit extends Block {
     constructor(props: any) {
         super('div', props)
     }
@@ -216,7 +216,13 @@ export function renderSettingsEdit():Block {
         }
     })
 
-
+    const btnBack: buttonComponent = new buttonComponent({
+        name: '<i class="fa-solid fa-angles-left"></i>',
+        id: 'btn-back',
+        type: 'button',
+        className:'btn-back',
+        onclick: `window.location.href='${paths.settings}'`
+    })
 
     const btnSave: buttonComponent = new buttonComponent({
         name: 'Save',
@@ -226,7 +232,7 @@ export function renderSettingsEdit():Block {
     })
 
 
-    const page: pageSettingsEdit = new pageSettingsEdit({
+    const page: PageSettingsEdit = new PageSettingsEdit({
         itemFirstName,
         itemSecondName,
         itemDisplayName,
@@ -234,6 +240,7 @@ export function renderSettingsEdit():Block {
         itemEmail,
         itemPhone,
         currentUser,
+        btnBack,
         btnSave,
         events: {
             submit: (e: SubmitEvent) => {

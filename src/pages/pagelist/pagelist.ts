@@ -1,7 +1,7 @@
 import Block from "../../utils/base-block";
 import { pagelistTemplate } from "./template";
 
-class pageList extends Block {
+class PageList extends Block {
   constructor() {
     super('div', {})
   }
@@ -12,7 +12,7 @@ class pageList extends Block {
 export function renderPagelist():Block {
  
 
-  const page: pageList = new pageList()
+  const page: PageList = new PageList()
   return page
 
 }

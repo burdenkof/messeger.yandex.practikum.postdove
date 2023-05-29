@@ -1,3 +1,5 @@
+import { paths } from "../../utils/routes";
+
 export const  signupTemplate =
 `
 <div class="logo-big" > 
@@ -5,7 +7,8 @@ export const  signupTemplate =
 </div>
 
 <div class="pages-login  pages-edit-settings">
-    <form name="form1"    action="/#chatlist" method="post">
+    {{{btnBack}}}
+    <form name="form1"    action="/#${paths.chatlist}" method="post">
         <h1 class="form-main-title">Sign up</h1>
             {{{itemFirstName}}}
             {{{itemSecondName}}}

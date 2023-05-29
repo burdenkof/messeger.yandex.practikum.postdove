@@ -2,14 +2,13 @@ import Block from "./base-block"
 import { Nullable, render } from "./renderDOM"
 
 export enum paths {
-    main = '/',
-    login = '/login',
+    login = '/',
     logout = '/logout',
-    signup = '/signup',
-    settings = '/settings',
-    settingsEdit = '/settings-edit',
+    signup = '/sign-up',
+    settings = '/profile',
+    settingsEdit = '/settings',
     changePassword = '/change-password',
-    chatlist = '/chatlist',
+    chatlist = '/messenger',
     error404 = '/error404',
     error500 = '/error500',
 }

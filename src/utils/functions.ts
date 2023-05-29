@@ -103,7 +103,7 @@ export type Indexed<T = any> = {
         last = item
      }
       object =  merge(object  as Indexed, last as Indexed )
-      console.log(object)
+      
       return object
     
   }

@@ -5,8 +5,10 @@ import Block from "../../utils/base-block";
 import buttonComponent from "../../components/button/button";
 import { getFormData } from "../../utils/renderDOM";
 import { controllerAuth } from "../../controllers/auth";
+import { paths, router } from "../../utils/routes";
+import { store } from "../../utils/store";
 
-class pageLogin extends Block {
+class PageLogin extends Block {
     constructor(props: any) {
 
         super("div", props);
@@ -26,7 +28,9 @@ export function doLogout():Block {
 }
 
 export function renderLogin():Block {
-
+    if (window.location.pathname == paths.login && (store.getState()).profileInfo) {
+        window.location.href= paths.chatlist
+      }
     const itemLogin: inputComponent = new inputComponent({
         name: 'login',
         placeholder: 'phone or email',
@@ -55,9 +59,9 @@ export function renderLogin():Block {
         name: 'Sign Up',
         id: 'btn-sign-up',
         type: 'button',
-        onclick: `window.location.href='/signup'`
+        onclick: `window.location.href='${paths.signup}'`
     })
-    const page = new pageLogin({
+    const page: PageLogin = new PageLogin({
         itemLogin, itemPassword, btnSignIn, btnSignUp, events: {
             submit: async (e: SubmitEvent) => {
                 e.preventDefault()

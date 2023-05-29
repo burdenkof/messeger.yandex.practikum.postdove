@@ -5,9 +5,10 @@ import Block from "../../utils/base-block";
 import { signupTemplate } from "./template";
 import { PregErrors, PregValidate } from "../../utils/pregValidates";
 import { controllerAuth } from "../../controllers/auth";
+import { paths } from "../../utils/routes";
 
 
-class pageSignup extends Block {
+class PageSignup extends Block {
     constructor(props: any) {
         super('div', props)
     }
@@ -256,7 +257,13 @@ export function renderSignup():Block {
             }
         }
     })
-
+    const btnBack: buttonComponent = new buttonComponent({
+        name: '<i class="fa-solid fa-angles-left"></i>',
+        id: 'btn-back',
+        type: 'button',
+        className:'btn-back',
+        onclick: `window.location.href='${paths.chatlist}'`
+    })
     const btnSignUp: buttonComponent = new buttonComponent({
         name: 'Sign Up',
         id: 'btn-sign-up',
@@ -264,7 +271,8 @@ export function renderSignup():Block {
         onclick: ''
     })
 
-    const page: pageSignup = new pageSignup({
+    const page: PageSignup = new PageSignup({
+        btnBack,
         itemFirstName,
         itemSecondName,
         itemDisplayName,
