@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "parcel ./static/index.html --open",
-    "build": "parcel build ./static/index.html",
+    "build": "parcel build ./static/index.html && cp -r ./static/_redirects dist",
     "eslint": "eslint",
     "start": "node ./src/server.ts"
   },
