@@ -11,7 +11,10 @@ import { chatRowTemplate } from './template'
 
 class chatRowComponent extends Block {
     constructor(props: chatRow) {
-
+        if(props.last_message){
+            let time = new Date(props.last_message.time)
+            props.last_message.time = time.toLocaleString()
+        }
 
 
         const btnDeleteChat: buttonComponent = new buttonComponent({
@@ -41,6 +44,28 @@ class chatRowComponent extends Block {
                         console.log(searchInfo)
                         if (searchInfo) {
                             controllerChatlist.addUserToChat(searchInfo[0].id, props.id)
+                            alert(searchInfo[0].login + ' добавлен в чат')
+                        } else {
+                            alert("Данный логин не найден")
+                        }
+                    }
+                }
+            }
+        })        
+        const btnDeleteUserFromChat: buttonComponent = new buttonComponent({
+            name: '<i class="fa-solid fa-user-slash"></i>',
+            id: 'btn-delete-user-from-chat' + props.id,
+            type: 'button',
+            events: {
+                click: async (e: Event) => {
+                    e.stopPropagation()
+                    const login: string | null = prompt("Укажите логин  пользователя для удаления из чат")
+                    if (login) {
+                        const searchInfo: profileInfo[] = await controllerUsers.search(login)
+                        console.log(searchInfo)
+                        if (searchInfo) {
+                            controllerChatlist.deleteUserFromChat(searchInfo[0].id, props.id)
+                            alert(searchInfo[0].login + ' удален из чата')
                         } else {
                             alert("Данный логин не найден")
                         }
@@ -49,7 +74,7 @@ class chatRowComponent extends Block {
             }
         })
         super("div", {
-            ...props, btnDeleteChat, btnAddUserToChat,
+            ...props, btnDeleteChat, btnAddUserToChat,btnDeleteUserFromChat,
             events: {
                 click: (e: PointerEvent) => {
                     store.set('currentChatId', this.props.id)
@@ -67,6 +92,7 @@ class chatRowComponent extends Block {
                 }
             }
         })
+ 
     }
 
     render() {
@@ -77,6 +103,10 @@ class chatRowComponent extends Block {
             return
         }
 
+        if(nextProps.last_message){
+            let time = new Date(nextProps.last_message.time)
+            nextProps.last_message.time = time.toLocaleString()
+        }
         Object.assign(this.props, nextProps)
     }
 }

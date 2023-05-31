@@ -8,8 +8,8 @@ export const  chatRowTemplate: string =
     <div class="chat-list_one-row_main-info"  >
         
         <div class="chat-list_one-row_main-info_time">
-        <div class="chat-list_one-row_main-info_delete">{{{btnAddUserToChat}}}&nbsp;{{{btnDeleteChat}}}</div>
-            {{last_message.time}}
+        <div class="chat-list_one-row_main-info_delete">{{last_message.time}}&nbsp;&nbsp;&nbsp;&nbsp;{{{btnAddUserToChat}}}&nbsp;{{{btnDeleteUserFromChat}}}&nbsp;{{{btnDeleteChat}}}</div>
+            
             
         </div>
 

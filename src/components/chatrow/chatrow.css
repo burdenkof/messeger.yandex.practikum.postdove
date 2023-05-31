@@ -34,7 +34,10 @@
 
         .chat-list_one-row_main-info_chat-name{
             font-size: 34px!important;
-            display:black
+            display:block;
+            width: 245px!important;
+             overflow-wrap: anywhere;
+
         }
         
         .chat-list_one-row_main-info_description{
@@ -50,8 +53,7 @@
 
             .chat-list_one-row_main-info_description_text{
                 font-size: 14px;
-                overflow: hidden;
-                max-width: 300px;
+                max-width: 226px;
                 white-space: nowrap;
             }
         }
@@ -72,11 +74,13 @@
                     align-items: flex-start;
     
                     .form-button{
-                        margin: 0px!important;
-                        align-self: flex-end;
                         font-size: 11px;
-                        padding: 5px!important;
-                        line-height: 9px;
+                        line-height: inherit;
+                        height: 15px;
+                        width: 15px;
+                        margin: 0 !important;
+                        text-align: center;
+                        padding: 5px !important;                    
                      
                     }
     
