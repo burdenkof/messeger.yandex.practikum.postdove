@@ -151,7 +151,7 @@ abstract class Block<P extends Record<string, any> = any>{
     }
 
 
-    componentDidUpdate(oldProps: Props, newProps: Props) {
+    componentDidUpdate(_oldProps: Props, _newProps: Props) {
         return true
     }
 
@@ -225,7 +225,7 @@ abstract class Block<P extends Record<string, any> = any>{
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target)
                 return true;
             },
-            deleteProperty(target, prop) {
+            deleteProperty(_target, _prop) {
                 throw new Error("Access denied");
             }
         });
