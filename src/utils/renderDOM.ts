@@ -1,3 +1,4 @@
+import { Exception } from 'handlebars';
 import Block from './base-block'
 export type Nullable<T> = T | null;
 export function getFormData(form: HTMLFormElement): Object{
@@ -19,6 +20,8 @@ export function render(block: Block, root: Nullable<HTMLDivElement>) {
         root.appendChild(block.getContent());
 
         block.dispatchComponentDidMount();
+    } else{
+        throw(new Exception('root elemtnt not found'))
     }
     return root;
 }
