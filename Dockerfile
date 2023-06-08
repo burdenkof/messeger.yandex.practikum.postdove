@@ -4,8 +4,6 @@ WORKDIR /var/www/app
 
 COPY package.json package-lock.json ./
 
-RUN ls
-
 RUN npm install
 
 COPY . .
