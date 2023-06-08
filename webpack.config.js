@@ -25,14 +25,18 @@ module.exports = {
     },
     module: {
         rules: [
+            
             {
                 test: /\.([cm]?ts|tsx)$/,
-                use: 'ts-loader',
+                use: [
+                    {
+                      loader: 'ts-loader',
+                      options: {
+                        compilerOptions: {noEmit: false},
+                      }
+                    }
+                  ],
                 exclude: /node_modules/,
-            },
-            {
-                test: /\.hbs/,
-                loader: 'handlebars-loader',
             },
             {
                 test: /\.css$/,
@@ -44,7 +48,7 @@ module.exports = {
     plugins: [
         require('autoprefixer'),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './static/index.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',

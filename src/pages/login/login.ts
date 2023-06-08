@@ -5,7 +5,7 @@ import Block from "../../utils/base-block";
 import buttonComponent from "../../components/button/button";
 import { getFormData } from "../../utils/renderDOM";
 import { controllerAuth } from "../../controllers/auth";
-import { paths, router } from "../../utils/routes";
+import { paths } from "../../utils/routes";
 import { store } from "../../utils/store";
 
 class PageLogin extends Block {
