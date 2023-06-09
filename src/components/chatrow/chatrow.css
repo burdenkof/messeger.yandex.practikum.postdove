@@ -1,0 +1,103 @@
+/* stylelint-disable length-zero-no-unit */
+/* stylelint-disable selector-class-pattern */
+.chat-list_one-row {
+    display: flex;
+    border-radius: 15px;
+    background: #ebf0f1;
+    margin: 10px;
+    padding: 10px;
+    max-width: 513px;
+    overflow: hidden;
+    cursor:pointer;
+    
+    .chat-list_one-row_avatar{
+        border-radius: 200px;
+        overflow: hidden;
+        width: 78px;
+        height: 78px;
+        background: #c1b8f5;
+        margin:5px;
+        margin-right: 16px;
+        box-sizing: border-box;
+    }   
+
+    .chat-list_one-row_avatar:hover{
+        border:1px solid orange;
+    }
+
+
+    .chat-list_one-row_main-info{
+        flex-grow:10;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .chat-list_one-row_main-info_chat-name{
+            font-size: 34px!important;
+            display:block;
+            width: 245px!important;
+             overflow-wrap: anywhere;
+
+        }
+        
+        .chat-list_one-row_main-info_description{
+            display:flex;
+            align-items: flex-end;       
+            overflow: hidden;
+
+            .chat-list_one-row_main-info_description_username{
+                color: #4685a9;
+                font-size: 14px;
+                
+            } 
+
+            .chat-list_one-row_main-info_description_text{
+                font-size: 14px;
+                max-width: 226px;
+                white-space: nowrap;
+            }
+        }
+
+        .chat-list_one-row_main-info_time{
+            align-self: flex-end;
+            color: gray;
+            font-size: 11px;
+
+            div{
+                line-height: 9px;
+            }
+            
+                .chat-list_one-row_main-info_delete{
+                    padding: 0px!important;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-start;
+    
+                    .form-button{
+                        font-size: 11px;
+                        line-height: inherit;
+                        height: 15px;
+                        width: 15px;
+                        margin: 0 !important;
+                        text-align: center;
+                        padding: 5px !important;                    
+                     
+                    }
+    
+                }
+            
+        }
+
+
+
+    }
+
+}
+
+.chat-list_one-row:hover {
+    background: #e9e9ec;
+}
+
+.chat-list_one-row.selected {
+    border: 1px solid orange!important;
+}

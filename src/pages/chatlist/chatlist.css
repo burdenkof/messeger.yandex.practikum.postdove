@@ -1,0 +1,103 @@
+/* stylelint-disable length-zero-no-unit */
+/* stylelint-disable selector-class-pattern */
+
+.chat-list{
+    display:flex;
+    position:relative;
+    height:calc(100vh - 15px);
+    width: 100vw;
+
+    aside{
+        flex-grow:1;
+        overflow-y:scroll;
+        min-width: 513px;
+    }
+
+    .chat-list_toolbar{
+        padding: 20px!important;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 5px;
+
+        .form-button{
+            margin: 0px!important;
+            align-self: flex-end;
+            
+         
+        }
+    }
+
+    .chat-list_messages-wrapper {
+        flex-grow:25;
+        height: calc(100vh);
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul{
+        padding: none;
+        margin: none;
+
+        li{
+            display: block;
+        }
+
+
+    }
+
+    .chat-list_message-list{
+        overflow-y:scroll;
+        padding-left:15px;
+        padding-right:15px;
+        height: calc(100vh);
+    }
+
+    .chat-list_send-input{
+        display: flex;
+        border-radius: 15px;
+        background: #ebf0f1;
+        margin:10px;
+        margin-bottom: 15px;
+        margin-top: none;
+        box-shadow: -6.0528px -2.0528px 9.9471px #dadada;
+
+        .chat-list_send-input_form{
+            width: 100%;
+            display: flex;
+        }
+        
+        .chat-list_send-input_text{
+            font-size: 15px;
+            width: 100%;
+            min-height:20px;
+            background: #ebf0f1;
+            border-radius: 11.6787px 46.7149px 46.7149px 11.6787px;
+            padding: 10px;
+            border: solid 1px #dadada;
+        }
+
+        .chat-list_send-input_text:focus, .chat-list_send-input_text:focus-visible {
+            outline-width: 0;
+            border: solid 1px gray!important;
+        }
+
+        .chat-list_send-input_btn-send {
+            position:absolute;
+            right: 11px;
+            width: 80px;
+            height: 41px;
+            border: none;
+            background: #6f94cc;
+            border-radius: 0px 46.7149px 46.7149px 0px;
+            color: white;
+            text-align: center;
+            padding: 0px;
+            font-size: 25px;
+        }
+
+        .chat-list_send-input_btn-send:hover{
+            box-shadow: 1.9471px 1.9471px 1.9471px #3b0aff61;
+        }
+    }
+}

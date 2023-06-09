@@ -1,0 +1,56 @@
+/* stylelint-disable selector-class-pattern */
+.pages-edit-settings, .pages-change-password{
+    height:auto;
+
+    .form-main-title{
+        font-size:34px;
+    }
+}
+
+.pages-settings{
+    width: 600px;
+    height:auto;
+
+    .pages-settings_profile-card{
+        display: flex;
+        width: 543px;
+        margin-right: 50px;
+        margin-left: 50px;
+        
+        .pages-settings_profile-card_avatar{
+            background: url('/static/img/avatar.png') center;
+            width: 171px;
+            height:171px;
+            border-radius: 150px;
+            cursor:pinter;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .pages-settings_profile-card_avatar:hover{
+            border:1px solid orange;
+        }
+
+        .pages-settings_profile-card_info{
+            flex-direction: column;
+            display: flex;
+            align-content: space-between;
+            justify-content: center;
+            align-items: flex-end;
+            flex-grow: 2;
+            margin-right: 50px;
+            margin-left: 50px;
+            
+            .pages-settings_profile-card_info_name{
+                font-size: 25px;
+                text-align: right;
+            }
+        }
+    }
+
+    .form-buttons {
+        width: 543px;
+        justify-content: flex-end;
+        display: flex;
+    }
+}

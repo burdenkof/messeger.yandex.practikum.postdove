@@ -1,0 +1,13 @@
+.pages-pagelist{
+    width: 400px;
+    height: 600px;
+    border-radius: 50px;
+    background-color: #dadada;
+    padding: 50px;
+    
+    a {
+        font-size: 26px;
+        color: black;
+    }
+    
+}

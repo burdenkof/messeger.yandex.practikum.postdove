@@ -1,0 +1,61 @@
+/* stylelint-disable length-zero-no-unit */
+/* stylelint-disable color-function-notation */
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+/* stylelint-disable selector-class-pattern */
+.message-list_one-row {
+    display:flex;
+    padding-bottom: 45px;
+
+
+
+    .message-list_one-row_baloon {
+        font-family: Inter;
+        font-weight: 400;
+        background: #a9acf0;
+        padding-top: 15px;
+        padding-right:40px;
+        padding-left:40px;
+        border-radius: 200px;
+        max-width: 50%;
+        color: white;
+        font-style: normal;
+        font-size: 19px;
+        line-height: 25px;
+        text-shadow: 0px 0.8229px 0.8229px rgba(0, 0, 0, 25%);
+        display: flex;
+        flex-direction: column;
+
+
+
+        .message-list_one-row_baloon_time {
+            align-self: flex-end;
+            margin-right: 56px;
+            font-size: 11px;
+        }
+
+        .message-list_one-row_user_info{
+            align-self: flex-start;
+            margin-top: -20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 4px;
+
+            .message-row_btn-del-from-chat{
+                font-size: 9px;
+                padding: 4px;
+                border-radius: 19px;
+                margin: 0px;
+                line-height: 12px;
+                
+            }
+        }
+
+    }
+
+}
+
+.message-list_one-row.output {
+    justify-content: flex-end;
+}
