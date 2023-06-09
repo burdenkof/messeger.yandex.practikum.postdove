@@ -30,10 +30,7 @@ module.exports = {
                 test: /\.([cm]?ts|tsx)$/,
                 use: [
                     {
-                      loader: 'ts-loader',
-                      options: {
-                        compilerOptions: {noEmit: false},
-                      }
+                      loader: 'ts-loader'
                     }
                   ],
                 exclude: /node_modules/,
