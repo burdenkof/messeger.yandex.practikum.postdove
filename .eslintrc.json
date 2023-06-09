@@ -1,11 +1,22 @@
 {
-    "extends": "airbnb",
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "rules": {
-      "no-shadow": "off",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": "airbnb",
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": { 
+    "semi":[2,"never"],
+    "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn",
-      "max-len": [2, 100],
-      "@typescript-eslint/no-unused-vars": 2
-      }
-  } 
+    "max-len": [
+      2,
+      100
+    ],
+    "@typescript-eslint/no-unused-vars": 2
+  }
+}
