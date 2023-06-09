@@ -8,7 +8,8 @@
     "start": "npm run build && node ./server.js",
     "test": "mocha --require ts-node/register --require ./mochaCnf.js './src/**/*.test.ts'",
     "lint": "eslint **/*.ts && stylelint **/*.css",
-    "stylelint": "npx stylelint **/*.css "
+    "stylelint": "npx stylelint **/*.css ",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
